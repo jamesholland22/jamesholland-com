@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StickerHeading from '../components/StickerHeading.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="James Holland — strategist, writer, and communications consultant for agencies and brands."
+>
+  <section class="about">
+    <div class="container container--narrow">
+      <StickerHeading
+        parts={[
+          "Hi, I'm James — a ",
+          { sticker: "strategist", color: "blue", rotate: -1 },
+          " who makes brands worth paying attention to."
+        ]}
+        as="h1"
+        class="about__heading"
+      />
+
+      <div class="prose about__body">
+        <p>
+          I've spent more than a decade working with agencies and brands on the thinking behind their communications — positioning, messaging architecture, campaign strategy, and the kind of clear writing that makes everything else easier.
+        </p>
+        <p>
+          Before going independent I led strategy teams at [Agency Name] and [Agency Name], working with clients including [Client], [Client], and [Client].
+        </p>
+        <p>
+          I'm based in [Location]. I take on a small number of projects at a time, which means the people I work with get my full attention.
+        </p>
+        <p>
+          If you've got a brief, a half-formed idea, or just want to talk — <a href="mailto:hello@jamesholland.com">get in touch</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about {
+    padding-top: var(--space-24);
+    padding-bottom: var(--space-32);
+  }
+
+  .about__heading {
+    margin-bottom: var(--space-12);
+    max-width: 20ch;
+  }
+
+  .about__body {
+    font-size: var(--text-lg);
+  }
+</style>

@@ -1,0 +1,151 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  client: string;
+  year: number;
+  tags: string[];
+  coverImage: ImageMetadata;
+  summary: string;
+}
+
+const { title, client, year, tags, coverImage, summary } = Astro.props;
+---
+
+<BaseLayout
+  title={`${title} — ${client}`}
+  description={summary}
+  ogType="article"
+>
+  <article class="case-study">
+    <!-- Hero -->
+    <div class="case-study__hero">
+      <div class="container">
+        <div class="case-study__meta">
+          <a href="/" class="case-study__back">← All work</a>
+          <div class="case-study__tags">
+            {tags.map((tag) => <span class="tag">{tag}</span>)}
+          </div>
+        </div>
+        <h1 class="case-study__title">{title}</h1>
+        <p class="case-study__summary">{summary}</p>
+        <p class="case-study__byline">{client} &middot; {year}</p>
+      </div>
+    </div>
+
+    <!-- Cover image -->
+    <div class="case-study__cover-wrap">
+      <div class="container">
+        <Image
+          src={coverImage}
+          alt={`Cover image for ${title}`}
+          class="case-study__cover"
+          widths={[640, 960, 1200]}
+          sizes="(min-width: 72rem) 68rem, 100vw"
+        />
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="container container--narrow case-study__body">
+      <div class="prose">
+        <slot />
+      </div>
+    </div>
+
+    <!-- Footer nav -->
+    <div class="container case-study__nav">
+      <a href="/" class="case-study__back case-study__back--bottom">← Back to all work</a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .case-study__hero {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-12);
+  }
+
+  .case-study__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-8);
+  }
+
+  .case-study__back {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .case-study__back:hover {
+    color: var(--color-text);
+  }
+
+  .case-study__tags {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    padding: 0.25em 0.75em;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+  }
+
+  .case-study__title {
+    font-size: var(--text-3xl);
+    max-width: 22ch;
+    margin-bottom: var(--space-6);
+  }
+
+  .case-study__summary {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 56ch;
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+  }
+
+  .case-study__byline {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .case-study__cover-wrap {
+    margin-bottom: var(--space-16);
+  }
+
+  .case-study__cover {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .case-study__body {
+    margin-bottom: var(--space-24);
+  }
+
+  .case-study__nav {
+    padding-bottom: var(--space-16);
+  }
+
+  .case-study__back--bottom {
+    display: inline-block;
+  }
+</style>

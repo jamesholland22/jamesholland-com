@@ -1,0 +1,52 @@
+---
+export type StickerColor = 'yellow' | 'pink' | 'green' | 'blue' | 'orange';
+
+interface Props {
+  label: string;
+  color: StickerColor;
+  rotate?: number;
+}
+
+const { label, color, rotate = -2 } = Astro.props;
+---
+
+<span
+  class:list={['sticker', `sticker--${color}`]}
+  style={`--rotate: ${rotate}deg`}
+  aria-label={label}
+>
+  {label}
+</span>
+
+<style>
+  .sticker {
+    display: inline-block;
+    padding: 0.1em 0.5em 0.18em;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-marker);
+    font-size: 0.8em;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    transform: rotate(var(--rotate));
+    transform-origin: center;
+    box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.12);
+    vertical-align: middle;
+    position: relative;
+    top: -0.06em;
+    white-space: nowrap;
+    cursor: default;
+    /* Subtle hover wobble */
+    transition: transform var(--transition-fast);
+  }
+
+  .sticker:hover {
+    transform: rotate(calc(var(--rotate) * -0.5)) scale(1.05);
+  }
+
+  .sticker--yellow { background: var(--sticker-yellow); color: #1a1a1a; }
+  .sticker--pink   { background: var(--sticker-pink);   color: #ffffff; }
+  .sticker--green  { background: var(--sticker-green);  color: #1a1a1a; }
+  .sticker--blue   { background: var(--sticker-blue);   color: #1a1a1a; }
+  .sticker--orange { background: var(--sticker-orange); color: #ffffff; }
+</style>

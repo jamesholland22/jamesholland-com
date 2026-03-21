@@ -1,0 +1,93 @@
+/* ── Type Scale Utilities ────────────────────────────────── */
+.text-xs   { font-size: var(--text-xs); }
+.text-sm   { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg   { font-size: var(--text-lg); }
+.text-xl   { font-size: var(--text-xl); }
+.text-2xl  { font-size: var(--text-2xl); }
+.text-3xl  { font-size: var(--text-3xl); }
+.text-4xl  { font-size: var(--text-4xl); }
+
+.font-display { font-family: var(--font-display); }
+.font-marker  { font-family: var(--font-marker); }
+
+.text-muted { color: var(--color-text-muted); }
+
+/* ── Prose (case study body content) ────────────────────── */
+.prose {
+  max-width: var(--max-width-prose);
+  line-height: 1.8;
+}
+
+.prose h2 {
+  font-size: var(--text-2xl);
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-4);
+}
+
+.prose h3 {
+  font-size: var(--text-xl);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+}
+
+.prose p {
+  margin-bottom: var(--space-6);
+}
+
+.prose ul,
+.prose ol {
+  margin-left: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.prose li {
+  margin-bottom: var(--space-2);
+}
+
+.prose li + li {
+  margin-top: var(--space-1);
+}
+
+.prose strong {
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--sticker-yellow);
+  padding: var(--space-4) var(--space-6);
+  margin: var(--space-8) 0;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.prose blockquote p {
+  margin-bottom: 0;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  color: var(--color-text-muted);
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--space-12) 0;
+}
+
+.prose img {
+  border-radius: var(--radius-lg);
+  margin: var(--space-8) 0;
+}

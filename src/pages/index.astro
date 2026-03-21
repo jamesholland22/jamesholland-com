@@ -1,0 +1,150 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StickerHeading from '../components/StickerHeading.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+
+// Get all non-draft case studies, sorted by order then year (newest first)
+const allWork = await getCollection('work', ({ data }) => !data.draft);
+const sortedWork = allWork.sort((a, b) => {
+  if (a.data.order !== undefined && b.data.order !== undefined) {
+    return a.data.order - b.data.order;
+  }
+  if (a.data.order !== undefined) return -1;
+  if (b.data.order !== undefined) return 1;
+  return b.data.year - a.data.year;
+});
+---
+
+<BaseLayout
+  title="James Holland"
+  description="Award-winning communications and marketing strategy for agencies and brands."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <StickerHeading
+        parts={[
+          { sticker: "Award winning", color: "yellow", rotate: -2 },
+          " communications and marketing strategy for ",
+          { sticker: "incredible", color: "pink", rotate: 2 },
+          " agencies and brands."
+        ]}
+        as="h1"
+        class="hero__heading"
+      />
+      <p class="hero__bio">
+        I'm James — a strategist with 10+ years helping ambitious agencies and
+        brands define what they stand for and say it clearly. I work on
+        positioning, messaging, campaigns, and the kind of thinking that makes
+        everything else easier.
+      </p>
+      <div class="hero__links">
+        <a href="mailto:hello@jamesholland.com" class="hero__cta">
+          Get in touch
+        </a>
+        <a href="https://linkedin.com/in/jamesholland" class="hero__secondary">
+          LinkedIn →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section class="work-section">
+    <div class="container">
+      <h2 class="work-section__heading">Selected work</h2>
+      <div class="work-grid">
+        {sortedWork.map((entry) => (
+          <CaseStudyCard
+            slug={entry.id}
+            title={entry.data.title}
+            client={entry.data.client}
+            year={entry.data.year}
+            tags={entry.data.tags}
+            coverImage={entry.data.coverImage}
+            summary={entry.data.summary}
+            featured={entry.data.featured}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Hero ──────────────────────────────────────────── */
+  .hero {
+    padding-top: var(--space-24);
+    padding-bottom: var(--space-24);
+  }
+
+  .hero__heading {
+    max-width: 18ch;
+    margin-bottom: var(--space-8);
+  }
+
+  .hero__bio {
+    font-size: var(--text-lg);
+    max-width: 50ch;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-8);
+  }
+
+  .hero__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 0.65em 1.5em;
+    background: var(--color-text);
+    color: var(--color-bg);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    transition: opacity var(--transition-fast);
+  }
+
+  .hero__cta:hover {
+    opacity: 0.8;
+  }
+
+  .hero__secondary {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .hero__secondary:hover {
+    color: var(--color-text);
+  }
+
+  /* ── Work section ──────────────────────────────────── */
+  .work-section {
+    padding-bottom: var(--space-24);
+  }
+
+  .work-section__heading {
+    font-size: var(--text-xs);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-12) var(--space-8);
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+import Sticker, { type StickerColor } from './Sticker.astro';
+
+type StickerDef = {
+  sticker: string;
+  color: StickerColor;
+  rotate?: number;
+};
+
+type Part = string | StickerDef;
+
+interface Props {
+  parts: Part[];
+  as?: 'h1' | 'h2' | 'h3';
+  class?: string;
+}
+
+const { parts, as: Tag = 'h1', class: className } = Astro.props;
+
+function isStickerDef(part: Part): part is StickerDef {
+  return typeof part === 'object' && 'sticker' in part;
+}
+---
+
+<Tag class:list={['sticker-heading', className]}>
+  {parts.map((part) =>
+    isStickerDef(part) ? (
+      <Sticker label={part.sticker} color={part.color} rotate={part.rotate} />
+    ) : (
+      part
+    )
+  )}
+</Tag>
+
+<style>
+  .sticker-heading {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+</style>

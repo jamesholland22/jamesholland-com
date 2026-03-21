@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(export PATH=\"/opt/homebrew/bin:/usr/local/bin:$PATH\")",
+      "Bash(echo $PATH)",
+      "Read(//Users/james/**)",
+      "Bash(brew --prefix)",
+      "Bash(/usr/bin/xcode-select -p)",
+      "Bash(ls ~/Downloads/*.pkg)",
+      "Bash(curl --version)"
+    ]
+  }
+}

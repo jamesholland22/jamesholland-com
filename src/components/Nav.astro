@@ -1,0 +1,102 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: 'Work' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="site-header__logo" aria-label="James Holland — home">
+      James Holland
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul class="site-nav__list">
+        {links.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class:list={['site-nav__link', { 'site-nav__link--active': currentPath === href }]}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    padding-block: var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    background: var(--color-bg);
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+  }
+
+  .site-header__logo {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    transition: opacity var(--transition-fast);
+  }
+
+  .site-header__logo:hover {
+    opacity: 0.65;
+  }
+
+  .site-nav__list {
+    display: flex;
+    gap: var(--space-6);
+    list-style: none;
+  }
+
+  .site-nav__link {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+    position: relative;
+  }
+
+  .site-nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-text);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-base);
+  }
+
+  .site-nav__link:hover {
+    color: var(--color-text);
+  }
+
+  .site-nav__link:hover::after,
+  .site-nav__link--active::after {
+    transform: scaleX(1);
+  }
+
+  .site-nav__link--active {
+    color: var(--color-text);
+  }
+</style>
