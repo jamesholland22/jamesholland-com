@@ -8,7 +8,6 @@ const CATEGORIES = ['Client work', 'Agency tools & tech', 'Side projects'] as co
 
 const allWork = await getCollection('work', ({ data }) => !data.draft);
 
-// Sort: by order (if set), then by year descending
 const sortedWork = allWork.sort((a, b) => {
   if (a.data.order !== undefined && b.data.order !== undefined) return a.data.order - b.data.order;
   if (a.data.order !== undefined) return -1;
@@ -16,7 +15,6 @@ const sortedWork = allWork.sort((a, b) => {
   return b.data.year - a.data.year;
 });
 
-// Group by category, only include categories that have entries
 const byCategory = CATEGORIES
   .map(cat => ({ category: cat, entries: sortedWork.filter(e => e.data.category === cat) }))
   .filter(g => g.entries.length > 0);
@@ -146,9 +144,23 @@ const byCategory = CATEGORIES
     border-bottom: 1px solid var(--color-border);
   }
 
+  /* ── Work grid: 1 → 2 → 3 columns ───────────────────── */
   .work-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: 1fr;
     gap: var(--space-12) var(--space-8);
+  }
+
+  @media (min-width: 40rem) {
+    .work-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .work-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-12) var(--space-6);
+    }
   }
 </style>

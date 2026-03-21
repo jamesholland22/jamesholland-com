@@ -3,7 +3,7 @@ title: "Repositioning a challenger brand for enterprise audiences"
 client: "Example Client"
 year: 2024
 tags: ["Brand Strategy", "Messaging", "B2B"]
-coverImage: "../../images/placeholder-cover-1.svg"
+coverImage: "https://picsum.photos/seed/brand-repo/800/450"
 summary: "Led a full messaging overhaul that shifted perception from scrappy startup to trusted enterprise partner — reducing average sales cycle by 30%."
 category: "Client work"
 featured: true

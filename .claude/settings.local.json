@@ -8,7 +8,8 @@
       "Bash(brew --prefix)",
       "Bash(/usr/bin/xcode-select -p)",
       "Bash(ls ~/Downloads/*.pkg)",
-      "Bash(curl --version)"
+      "Bash(curl --version)",
+      "Bash(find '/Users/james/Documents/Claude Code/Personal website/src/pages' -name [slug]* -o -name *[*]*)"
     ]
   }
 }

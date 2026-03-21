@@ -3,7 +3,7 @@ title: "Integrated campaign strategy for a product launch"
 client: "Another Client"
 year: 2023
 tags: ["Campaign Strategy", "Content", "Launch"]
-coverImage: "../../images/placeholder-cover-2.svg"
+coverImage: "https://picsum.photos/seed/campaign/800/450"
 summary: "Developed the end-to-end communications strategy for a flagship product launch, reaching 2.4M people across earned, owned and paid channels."
 category: "Client work"
 featured: false
