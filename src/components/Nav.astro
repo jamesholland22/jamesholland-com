@@ -2,18 +2,8 @@
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname;
 
-const links = [
-  {
-    href: `${base}/`,
-    label: 'Work',
-    active: path === `${base}/` || path === `${base}`,
-  },
-  {
-    href: `${base}/about`,
-    label: 'About',
-    active: path.startsWith(`${base}/about`),
-  },
-];
+const isWork = path === `${base}/` || path === base || (!path.includes('/about') && !path.includes('/work/'));
+const isAbout = path.startsWith(`${base}/about`);
 ---
 
 <header class="site-header">
@@ -23,16 +13,41 @@ const links = [
     </a>
     <nav class="site-nav" aria-label="Main navigation">
       <ul class="site-nav__list">
-        {links.map(({ href, label, active }) => (
-          <li>
-            <a
-              href={href}
-              class:list={['site-nav__link', { 'site-nav__link--active': active }]}
-            >
-              {label}
-            </a>
-          </li>
-        ))}
+
+        <!-- Work with dropdown -->
+        <li class="nav-item has-dropdown">
+          <a
+            href={`${base}/`}
+            class:list={['site-nav__link', { 'site-nav__link--active': isWork }]}
+          >
+            Work
+            <svg class="nav-chevron" width="10" height="10" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+              <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <ul class="nav-dropdown" role="list">
+            <li>
+              <a href={`${base}/#client-work`} class="nav-dropdown__link">Client work</a>
+            </li>
+            <li>
+              <a href={`${base}/#agency-tools-tech`} class="nav-dropdown__link">Agency tools &amp; tech</a>
+            </li>
+            <li>
+              <a href={`${base}/#side-projects`} class="nav-dropdown__link">Side projects</a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- About -->
+        <li class="nav-item">
+          <a
+            href={`${base}/about`}
+            class:list={['site-nav__link', { 'site-nav__link--active': isAbout }]}
+          >
+            About
+          </a>
+        </li>
+
       </ul>
     </nav>
   </div>
@@ -45,7 +60,7 @@ const links = [
     position: sticky;
     top: 0;
     background: var(--color-bg);
-    z-index: 10;
+    z-index: 100;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
@@ -75,12 +90,20 @@ const links = [
     list-style: none;
   }
 
+  /* ── Nav item & dropdown container ── */
+  .nav-item {
+    position: relative;
+  }
+
   .site-nav__link {
     font-size: var(--text-sm);
     font-weight: 500;
     color: var(--color-text-muted);
     transition: color var(--transition-fast);
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
   }
 
   .site-nav__link::after {
@@ -107,5 +130,63 @@ const links = [
 
   .site-nav__link--active {
     color: var(--color-text);
+  }
+
+  .nav-chevron {
+    opacity: 0.5;
+    transition: transform var(--transition-fast);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .has-dropdown:hover .nav-chevron,
+  .has-dropdown:focus-within .nav-chevron {
+    transform: rotate(180deg);
+    opacity: 0.8;
+  }
+
+  /* ── Dropdown panel ── */
+  .nav-dropdown {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    left: -1rem;
+    list-style: none;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2) 0;
+    min-width: 13rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+
+    /* Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition:
+      opacity var(--transition-fast),
+      visibility var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  /* Show on hover or keyboard focus-within */
+  .has-dropdown:hover .nav-dropdown,
+  .has-dropdown:focus-within .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-dropdown__link {
+    display: block;
+    padding: 0.55em 1.25rem;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast), background var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .nav-dropdown__link:hover {
+    color: var(--color-text);
+    background: var(--color-bg);
   }
 </style>

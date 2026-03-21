@@ -23,6 +23,7 @@ const { slug, title, client, year, tags, coverImage, summary } = Astro.props;
         alt={title}
         class="card__image"
         loading="lazy"
+        transition:name={`cover-${slug}`}
       />
     ) : (
       <div class="card__image card__image--placeholder" aria-hidden="true"></div>
@@ -34,7 +35,7 @@ const { slug, title, client, year, tags, coverImage, summary } = Astro.props;
       <span class="card__sep" aria-hidden="true">·</span>
       <span class="card__year">{year}</span>
     </div>
-    <h2 class="card__title">{title}</h2>
+    <h2 class="card__title" transition:name={`title-${slug}`}>{title}</h2>
     <p class="card__summary">{summary}</p>
     <div class="card__tags">
       {tags.slice(0, 3).map((tag) => <span class="tag">{tag}</span>)}

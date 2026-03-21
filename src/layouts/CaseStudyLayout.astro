@@ -32,7 +32,7 @@ const { title, client, year, tags, coverImage, summary, protected: isProtected =
             {tags.map((tag) => <span class="tag">{tag}</span>)}
           </div>
         </div>
-        <h1 class="case-study__title">{title}</h1>
+        <h1 class="case-study__title" transition:name={`title-${Astro.params.slug}`}>{title}</h1>
         <p class="case-study__summary">{summary}</p>
         <p class="case-study__byline">{client} &middot; {year}</p>
       </div>
@@ -48,6 +48,7 @@ const { title, client, year, tags, coverImage, summary, protected: isProtected =
               alt={`Cover image for ${title}`}
               class="case-study__cover"
               loading="lazy"
+              transition:name={`cover-${Astro.params.slug}`}
             />
           </div>
         </div>

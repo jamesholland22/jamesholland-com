@@ -16,7 +16,11 @@ const sortedWork = allWork.sort((a, b) => {
 });
 
 const byCategory = CATEGORIES
-  .map(cat => ({ category: cat, entries: sortedWork.filter(e => e.data.category === cat) }))
+  .map(cat => ({
+    category: cat,
+    id: cat.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, ''),
+    entries: sortedWork.filter(e => e.data.category === cat),
+  }))
   .filter(g => g.entries.length > 0);
 ---
 
@@ -51,8 +55,8 @@ const byCategory = CATEGORIES
   </section>
 
   <!-- Work sections -->
-  {byCategory.map(({ category, entries }) => (
-    <section class="work-section">
+  {byCategory.map(({ category, id, entries }) => (
+    <section class="work-section" id={id}>
       <div class="container">
         <h2 class="work-section__heading">{category}</h2>
         <div class="work-grid">
