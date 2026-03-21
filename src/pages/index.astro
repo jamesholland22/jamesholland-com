@@ -58,7 +58,7 @@ const byCategory = CATEGORIES
         <div class="work-grid">
           {entries.map((entry) => (
             <CaseStudyCard
-              slug={entry.id}
+              slug={entry.id.replace(/\.mdx?$/, '')}
               title={entry.data.title}
               client={entry.data.client}
               year={entry.data.year}
