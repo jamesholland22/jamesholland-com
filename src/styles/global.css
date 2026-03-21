@@ -17,7 +17,7 @@
   /* Typography */
   --font-sans:    'Archivo', system-ui, -apple-system, sans-serif;
   --font-display: 'Archivo Black', system-ui, -apple-system, sans-serif;
-  --font-marker:  'Caveat', cursive;
+  --font-marker:  'Archivo Black', system-ui, sans-serif;
 
   /* Fluid type scale */
   --text-xs:   clamp(0.75rem,  1.5vw, 0.875rem);

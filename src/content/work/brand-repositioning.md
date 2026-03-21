@@ -5,6 +5,7 @@ year: 2024
 tags: ["Brand Strategy", "Messaging", "B2B"]
 coverImage: "../../images/placeholder-cover-1.svg"
 summary: "Led a full messaging overhaul that shifted perception from scrappy startup to trusted enterprise partner — reducing average sales cycle by 30%."
+category: "Client work"
 featured: true
 order: 1
 draft: false

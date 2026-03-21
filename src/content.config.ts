@@ -11,6 +11,7 @@ const work = defineCollection({
       tags: z.array(z.string()),
       coverImage: image(),
       summary: z.string(),
+      category: z.enum(['Client work', 'Agency tools & tech', 'Side projects']).default('Client work'),
       featured: z.boolean().default(false),
       order: z.number().optional(),
       draft: z.boolean().default(false),

@@ -5,6 +5,7 @@ year: 2023
 tags: ["Campaign Strategy", "Content", "Launch"]
 coverImage: "../../images/placeholder-cover-2.svg"
 summary: "Developed the end-to-end communications strategy for a flagship product launch, reaching 2.4M people across earned, owned and paid channels."
+category: "Client work"
 featured: false
 order: 2
 draft: false

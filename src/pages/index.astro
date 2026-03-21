@@ -4,16 +4,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import StickerHeading from '../components/StickerHeading.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 
-// Get all non-draft case studies, sorted by order then year (newest first)
+const CATEGORIES = ['Client work', 'Agency tools & tech', 'Side projects'] as const;
+
 const allWork = await getCollection('work', ({ data }) => !data.draft);
+
+// Sort: by order (if set), then by year descending
 const sortedWork = allWork.sort((a, b) => {
-  if (a.data.order !== undefined && b.data.order !== undefined) {
-    return a.data.order - b.data.order;
-  }
+  if (a.data.order !== undefined && b.data.order !== undefined) return a.data.order - b.data.order;
   if (a.data.order !== undefined) return -1;
   if (b.data.order !== undefined) return 1;
   return b.data.year - a.data.year;
 });
+
+// Group by category, only include categories that have entries
+const byCategory = CATEGORIES
+  .map(cat => ({ category: cat, entries: sortedWork.filter(e => e.data.category === cat) }))
+  .filter(g => g.entries.length > 0);
 ---
 
 <BaseLayout
@@ -40,40 +46,38 @@ const sortedWork = allWork.sort((a, b) => {
         everything else easier.
       </p>
       <div class="hero__links">
-        <a href="mailto:hello@jamesholland.com" class="hero__cta">
-          Get in touch
-        </a>
-        <a href="https://linkedin.com/in/jamesholland" class="hero__secondary">
-          LinkedIn →
-        </a>
+        <a href="mailto:hello@jamesholland.com" class="hero__cta">Get in touch</a>
+        <a href="https://linkedin.com/in/jamesholland" class="hero__secondary">LinkedIn →</a>
       </div>
     </div>
   </section>
 
-  <!-- Work -->
-  <section class="work-section">
-    <div class="container">
-      <h2 class="work-section__heading">Selected work</h2>
-      <div class="work-grid">
-        {sortedWork.map((entry) => (
-          <CaseStudyCard
-            slug={entry.id}
-            title={entry.data.title}
-            client={entry.data.client}
-            year={entry.data.year}
-            tags={entry.data.tags}
-            coverImage={entry.data.coverImage}
-            summary={entry.data.summary}
-            featured={entry.data.featured}
-          />
-        ))}
+  <!-- Work sections -->
+  {byCategory.map(({ category, entries }) => (
+    <section class="work-section">
+      <div class="container">
+        <h2 class="work-section__heading">{category}</h2>
+        <div class="work-grid">
+          {entries.map((entry) => (
+            <CaseStudyCard
+              slug={entry.id}
+              title={entry.data.title}
+              client={entry.data.client}
+              year={entry.data.year}
+              tags={entry.data.tags}
+              coverImage={entry.data.coverImage}
+              summary={entry.data.summary}
+              featured={entry.data.featured}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  ))}
 </BaseLayout>
 
 <style>
-  /* ── Hero ──────────────────────────────────────────── */
+  /* ── Hero ────────────────────────────────────────────── */
   .hero {
     padding-top: var(--space-24);
     padding-bottom: var(--space-24);
@@ -125,7 +129,7 @@ const sortedWork = allWork.sort((a, b) => {
     color: var(--color-text);
   }
 
-  /* ── Work section ──────────────────────────────────── */
+  /* ── Work sections ───────────────────────────────────── */
   .work-section {
     padding-bottom: var(--space-24);
   }
