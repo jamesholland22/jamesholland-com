@@ -3,14 +3,42 @@ import { getCollection, render } from 'astro:content';
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('work', ({ data }) => !data.draft);
-  return entries.map((entry) => ({
-    params: { slug: entry.id.replace(/\.mdx?$/, '') },
-    props: { entry },
-  }));
+  const allEntries = await getCollection('work', ({ data }) => !data.draft);
+
+  return allEntries.map((entry) => {
+    const slug = entry.id.replace(/\.mdx?$/, '');
+    const category = entry.data.category;
+
+    // Siblings in same category, sorted by order then year descending
+    const siblings = allEntries
+      .filter((e) => e.data.category === category && !e.data.draft)
+      .sort((a, b) => {
+        const ao = a.data.order ?? 999;
+        const bo = b.data.order ?? 999;
+        if (ao !== bo) return ao - bo;
+        return b.data.year - a.data.year;
+      });
+
+    const idx = siblings.findIndex((e) => e.id === entry.id);
+    const prevEntry = idx > 0 ? siblings[idx - 1] : null;
+    const nextEntry = idx < siblings.length - 1 ? siblings[idx + 1] : null;
+
+    return {
+      params: { slug },
+      props: {
+        entry,
+        prev: prevEntry
+          ? { title: prevEntry.data.title, slug: prevEntry.id.replace(/\.mdx?$/, ''), client: prevEntry.data.client }
+          : null,
+        next: nextEntry
+          ? { title: nextEntry.data.title, slug: nextEntry.id.replace(/\.mdx?$/, ''), client: nextEntry.data.client }
+          : null,
+      },
+    };
+  });
 }
 
-const { entry } = Astro.props;
+const { entry, prev, next } = Astro.props;
 const { Content } = await render(entry);
 ---
 
@@ -22,6 +50,9 @@ const { Content } = await render(entry);
   coverImage={entry.data.coverImage}
   summary={entry.data.summary}
   protected={entry.data.protected}
+  category={entry.data.category}
+  prev={prev}
+  next={next}
 >
   <Content />
 </CaseStudyLayout>
