@@ -70,15 +70,16 @@ const fullTitle = title === 'James Holland' ? title : `${title} — James Hollan
     -->
     <svg width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden">
       <defs>
-        <filter id="sticker-outline" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+        <filter id="sticker-outline" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
           <!-- Expand the alpha channel smoothly in all directions -->
-          <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
-          <!-- Threshold back to solid white — amplify alpha then clip -->
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" />
+          <!-- Threshold back to solid white — amplify alpha then clip.
+               Row 4 (alpha): output = 18*input - 1.5 → solid above ~8% opacity -->
           <feColorMatrix in="blur" type="matrix"
             values="0 0 0 0 1
                     0 0 0 0 1
                     0 0 0 0 1
-                    0 0 0 20 -2"
+                    0 0 0 18 -1.5"
             result="outline" />
           <!-- Composite: white outline behind, original on top -->
           <feMerge>
