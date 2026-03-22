@@ -198,21 +198,14 @@ const svgDef = name ? svgLibrary[name] : null;
     will-change: transform;
   }
 
-  /* SVG stickers: 8-directional drop-shadow traces clean vector edges */
+  /* SVG stickers: feMorphology dilate gives even-thickness outline on all
+     shapes including sharp points; tiny blur smooths the quantised edge */
   .g-sticker--vector {
-    filter:
-      drop-shadow(0     3px   0 #fff)
-      drop-shadow(0    -3px   0 #fff)
-      drop-shadow(3px   0     0 #fff)
-      drop-shadow(-3px  0     0 #fff)
-      drop-shadow(2.5px  2.5px  0 #fff)
-      drop-shadow(-2.5px 2.5px  0 #fff)
-      drop-shadow(2.5px -2.5px  0 #fff)
-      drop-shadow(-2.5px -2.5px 0 #fff)
-      var(--g-shadow);
+    filter: url(#sticker-outline-svg) var(--g-shadow);
   }
 
-  /* Raster stickers (emoji, PNG): Gaussian blur traces smooth pixel shapes */
+  /* Raster stickers (emoji, PNG): Gaussian blur + threshold traces the
+     smooth painted shape boundary without pixel-level noise */
   .g-sticker--raster {
     filter: url(#sticker-outline) var(--g-shadow);
   }

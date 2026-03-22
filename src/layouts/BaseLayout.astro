@@ -64,29 +64,58 @@ const fullTitle = title === 'James Holland' ? title : `${title} — James Hollan
   </head>
   <body>
     <!--
-      Sticker outline filter — defined once, referenced by GraphicSticker via
-      filter: url(#sticker-outline). Gaussian blur + alpha threshold creates a
-      smooth, flowing outline that follows the shape rather than pixel edges.
+      Sticker outline filters — defined once here, referenced by sticker components.
+
+      #sticker-outline-svg  → inline SVG stickers (GraphicSticker name=…)
+        Uses feMorphology dilate: expands alpha by exactly N px in every direction,
+        giving an even-thickness outline even at sharp star tips. A tiny blur pass
+        then smooths the quantised dilation edge before thresholding to white.
+
+      #sticker-outline      → raster stickers (emoji <img>, PNG) + text stickers
+        Uses Gaussian blur alone: feMorphology on raster pixels produces noise;
+        blur-then-threshold traces the smooth painted shape boundary instead.
     -->
     <svg width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden">
       <defs>
+
+        <!-- ── SVG sticker outline ───────────────────────────────────────── -->
+        <filter id="sticker-outline-svg" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+          <!-- 1. Expand the shape alpha uniformly by 3 px in all directions -->
+          <feMorphology in="SourceAlpha" operator="dilate" radius="3" result="dilated" />
+          <!-- 2. Lightly blur to smooth the pixel-quantised dilation edge -->
+          <feGaussianBlur in="dilated" stdDeviation="0.6" result="smooth" />
+          <!-- 3. Threshold to solid white (30x amplify, offset −3 clips near-zero) -->
+          <feColorMatrix in="smooth" type="matrix"
+            values="0 0 0 0 1
+                    0 0 0 0 1
+                    0 0 0 0 1
+                    0 0 0 30 -3"
+            result="outline" />
+          <!-- 4. Composite: white outline behind, original on top -->
+          <feMerge>
+            <feMergeNode in="outline" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        <!-- ── Raster / emoji / text sticker outline ────────────────────── -->
         <filter id="sticker-outline" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
-          <!-- Expand the alpha channel smoothly in all directions -->
+          <!-- 1. Blur the alpha channel to spread it smoothly -->
           <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" />
-          <!-- Threshold back to solid white — amplify alpha then clip.
-               Row 4 (alpha): output = 18*input - 1.5 → solid above ~8% opacity -->
+          <!-- 2. Threshold to solid white -->
           <feColorMatrix in="blur" type="matrix"
             values="0 0 0 0 1
                     0 0 0 0 1
                     0 0 0 0 1
                     0 0 0 18 -1.5"
             result="outline" />
-          <!-- Composite: white outline behind, original on top -->
+          <!-- 3. Composite: white outline behind, original on top -->
           <feMerge>
             <feMergeNode in="outline" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
+
       </defs>
     </svg>
     <Nav />
