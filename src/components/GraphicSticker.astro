@@ -2,12 +2,9 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
-export type StickerColor = 'yellow' | 'pink' | 'green' | 'blue' | 'orange';
-export type StickerName =
-  | 'star' | 'sparkle' | 'burst'
-  | 'arrow' | 'check' | 'circle'
-  | 'lightning' | 'heart' | 'plus' | 'wave';
-export type StickerSize = 'sm' | 'md' | 'lg';
+type StickerColor = 'yellow' | 'pink' | 'green' | 'blue' | 'orange';
+type StickerName = 'star' | 'sparkle' | 'burst' | 'arrow' | 'check' | 'circle' | 'lightning' | 'heart' | 'plus' | 'wave';
+type StickerSize = 'sm' | 'md' | 'lg';
 
 interface Props {
   /** Pick a built-in SVG sticker by name */
