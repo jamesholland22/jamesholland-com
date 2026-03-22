@@ -1,0 +1,423 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GraphicSticker from '../components/GraphicSticker.astro';
+import Sticker from '../components/Sticker.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const stickers = ['star','sparkle','burst','arrow','check','circle','lightning','heart','plus','wave'] as const;
+const colors   = ['yellow','pink','green','blue','orange'] as const;
+const sizes    = ['sm','md','lg'] as const;
+---
+
+<BaseLayout title="Kitchen Sink — Design Reference">
+  <div class="ks-page">
+
+    <!-- ── Header ─────────────────────────────────────────── -->
+    <header class="ks-header container">
+      <a href={`${base}/`} class="ks-back">← All work</a>
+      <div class="ks-header__label">Internal reference</div>
+      <h1 class="ks-title">Kitchen <GraphicSticker name="sparkle" color="yellow" /> Sink</h1>
+      <p class="ks-subtitle">Every sticker, every size, every colour, every prose element — in one place. Not linked from the site.</p>
+    </header>
+
+    <div class="ks-body container">
+
+      <!-- ── Section 1: Sticker reference grid ───────────── -->
+      <section class="ks-section">
+        <h2 class="ks-section__title">1 — All stickers × all colours</h2>
+        <p class="ks-section__desc">10 shapes × 5 colours = 50 combinations. Default size (<code>md</code>).</p>
+
+        <div class="sticker-grid">
+          <div class="sticker-grid__header">
+            <span></span>
+            {colors.map(c => <span class="sg-col-label">{c}</span>)}
+          </div>
+          {stickers.map(name => (
+            <div class="sticker-grid__row">
+              <span class="sg-row-label">{name}</span>
+              {colors.map(color => (
+                <span class="sg-cell">
+                  <GraphicSticker name={name} color={color} rotate={0} />
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ── Section 2: Sizes ────────────────────────────── -->
+      <section class="ks-section">
+        <h2 class="ks-section__title">2 — Sizes</h2>
+        <p class="ks-section__desc">Three sizes: <code>sm</code> (1.25em) · <code>md</code> (1.75em) · <code>lg</code> (2.75em). All are relative to the surrounding font size.</p>
+
+        <div class="size-demo">
+          {sizes.map(size => (
+            <div class="size-demo__row">
+              <span class="size-demo__label"><code>{size}</code></span>
+              <span class="size-demo__stickers">
+                <GraphicSticker name="star"      color="yellow" size={size} rotate={-8} />
+                <GraphicSticker name="burst"     color="pink"   size={size} rotate={10} />
+                <GraphicSticker name="lightning" color="orange" size={size} rotate={-6} />
+                <GraphicSticker name="check"     color="green"  size={size} rotate={-5} />
+                <GraphicSticker name="wave"      color="blue"   size={size} rotate={-2} />
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ── Section 3: In headings ──────────────────────── -->
+      <section class="ks-section">
+        <h2 class="ks-section__title">3 — Stickers in headings</h2>
+        <p class="ks-section__desc">Stickers scale with the heading's font size since they use <code>em</code> units.</p>
+
+        <div class="prose ks-prose-demo">
+          <h1><GraphicSticker name="burst" color="yellow" /> H1 — Award winning strategy</h1>
+          <h2><GraphicSticker name="star" color="pink" /> H2 — The brief</h2>
+          <h3><GraphicSticker name="check" color="green" /> H3 — What I did</h3>
+          <h2><GraphicSticker name="sparkle" color="blue" /> H2 — The outcome</h2>
+          <h3><GraphicSticker name="arrow" color="orange" /> H3 — Next steps</h3>
+        </div>
+      </section>
+
+      <!-- ── Section 4: Inline in text ──────────────────── -->
+      <section class="ks-section">
+        <h2 class="ks-section__title">4 — Stickers inline in body text</h2>
+        <p class="ks-section__desc">Using <code>size="sm"</code> keeps them proportional in running text.</p>
+
+        <div class="prose ks-prose-demo">
+          <p>
+            Win rates on enterprise deals increased by <strong>22%</strong>
+            <GraphicSticker name="check" color="green" size="sm" /> and the average deal size grew by
+            <strong>40%</strong> — the biggest quarter in the company's history
+            <GraphicSticker name="burst" color="yellow" size="sm" />.
+          </p>
+          <p>
+            Currently at <strong>2,800 subscribers</strong>
+            <GraphicSticker name="heart" color="pink" size="sm" /> with an average open rate
+            of <strong>48%</strong>. A number that keeps
+            <GraphicSticker name="arrow" color="blue" size="sm" /> growing without any paid promotion.
+          </p>
+          <p>
+            The output wasn't always right
+            <GraphicSticker name="lightning" color="orange" size="sm" /> — but it was always useful.
+            It gave the team something to push back against
+            <GraphicSticker name="plus" color="green" size="sm" />, which turned out to be the most valuable part.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── Section 5: Text stickers (Sticker component) ── -->
+      <section class="ks-section">
+        <h2 class="ks-section__title">5 — Text stickers (the original Sticker component)</h2>
+        <p class="ks-section__desc">Used in the hero headline. Can be mixed with graphic stickers.</p>
+
+        <div class="prose ks-prose-demo">
+          <p>
+            <Sticker label="Award winning" color="yellow" />
+            &nbsp;strategy for&nbsp;
+            <Sticker label="agencies" color="pink" rotate={2} />
+            &nbsp;and&nbsp;
+            <Sticker label="brands" color="green" rotate={-3} />.
+          </p>
+          <p>
+            <Sticker label="B2B" color="blue" />
+            &nbsp;
+            <Sticker label="Brand strategy" color="orange" rotate={1} />
+            &nbsp;
+            <Sticker label="Messaging" color="yellow" rotate={-2} />
+            &nbsp;alongside
+            <GraphicSticker name="sparkle" color="pink" size="sm" />
+            graphic stickers.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── Section 6: Full prose formatting ───────────── -->
+      <section class="ks-section">
+        <h2 class="ks-section__title">6 — Full prose formatting</h2>
+        <p class="ks-section__desc">Everything the <code>.prose</code> class styles — as it appears in case study body content.</p>
+
+        <div class="prose ks-prose-demo">
+          <h2><GraphicSticker name="circle" color="blue" /> The brief</h2>
+
+          <p>
+            The client had grown rapidly through the SMB market but was <strong>struggling to land enterprise deals</strong>.
+            Their existing messaging leaned heavily on agility and disruption — qualities that enterprise procurement
+            teams didn't value. They needed a positioning shift that felt <em>true to their culture</em> while
+            appealing to a new, more risk-averse audience.
+          </p>
+
+          <p>
+            This meant rethinking everything from the homepage headline to the sales deck — not just the words,
+            but the evidence behind them. Messaging without proof is just noise.
+          </p>
+
+          <h3>Discovery</h3>
+
+          <p>
+            I ran a series of workshops with the commercial leadership team to surface the unspoken beliefs
+            that had driven their growth. Alongside that, I conducted interviews with:
+          </p>
+
+          <ul>
+            <li>Eight existing customers across three verticals</li>
+            <li>Four prospects who had chosen a competitor in the previous 12 months</li>
+            <li>The full sales team — to understand what was actually landing in the room</li>
+          </ul>
+
+          <p>The gap was clear: the client was talking about <em>how</em> they worked, not <em>what clients could rely on</em>.</p>
+
+          <h3>The framework</h3>
+
+          <p>From that research I developed a new messaging framework built around three proof points:</p>
+
+          <ol>
+            <li><strong>Reliability</strong> — consistency of delivery, not speed of response</li>
+            <li><strong>Expertise</strong> — depth of category knowledge, not breadth of services</li>
+            <li><strong>Partnership depth</strong> — the way they embed in client teams</li>
+          </ol>
+
+          <p>
+            Each was supported by evidence from real customer stories that hadn't previously been told publicly.
+            The research phase surfaced those stories; my job was to shape them into something usable.
+          </p>
+
+          <h2><GraphicSticker name="burst" color="yellow" /> The outcome</h2>
+
+          <blockquote>
+            "James didn't just give us a new tagline — he gave us a way of talking about ourselves that we actually believed in."
+            — Chief Commercial Officer
+          </blockquote>
+
+          <p>
+            The new positioning rolled out across the website, sales collateral, and a refreshed pitch deck.
+            Within two quarters, win rates on enterprise deals increased by <strong>22%</strong>
+            <GraphicSticker name="check" color="green" size="sm" /> and the average deal size grew by
+            <strong>40%</strong>.
+          </p>
+
+          <hr />
+
+          <p>
+            This is what an <a href="#">inline link looks like</a> inside body copy — it inherits the
+            text colour and adds a subtle underline offset. Links in prose should always be clear but
+            never shouty.
+          </p>
+
+          <p>
+            And here's a code reference: the sticker component is called with
+            <code>&lt;GraphicSticker name="star" color="yellow" /&gt;</code> and accepts
+            <code>name</code>, <code>color</code>, <code>size</code>, and <code>rotate</code> props.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── Section 7: PNG sticker usage ───────────────── -->
+      <section class="ks-section">
+        <h2 class="ks-section__title">7 — Using a PNG sticker</h2>
+        <p class="ks-section__desc">
+          Upload a PNG to <code>src/images/stickers/</code> on GitHub, then in any <code>.mdx</code> file:
+        </p>
+        <pre class="ks-code"><code>{`import GraphicSticker from '../../components/GraphicSticker.astro';
+import myBadge from '../../images/stickers/my-badge.png';
+
+<GraphicSticker src={myBadge} size="lg" rotate={-5} />`}</code></pre>
+        <p class="ks-section__desc" style="margin-top: 1rem;">
+          PNGs are processed through Astro's image pipeline: resized, converted to WebP, and fingerprinted for caching.
+          The <code>color</code> prop has no effect on raster images — use the image itself for colour.
+          A subtle <code>drop-shadow</code> is applied automatically.
+        </p>
+      </section>
+
+    </div><!-- /ks-body -->
+  </div><!-- /ks-page -->
+</BaseLayout>
+
+<style>
+  .ks-page {
+    padding-bottom: var(--space-32);
+  }
+
+  /* ── Header ── */
+  .ks-header {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-12);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-16);
+  }
+
+  .ks-back {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    display: inline-block;
+    margin-bottom: var(--space-6);
+    transition: color var(--transition-fast);
+  }
+  .ks-back:hover { color: var(--color-text); }
+
+  .ks-header__label {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .ks-title {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .ks-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 52ch;
+  }
+
+  /* ── Body ── */
+  .ks-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-24);
+  }
+
+  /* ── Section wrapper ── */
+  .ks-section__title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-2);
+  }
+
+  .ks-section__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-8);
+    max-width: 60ch;
+  }
+
+  .ks-section__desc code,
+  .ks-section p code {
+    font-family: ui-monospace, monospace;
+    font-size: 0.88em;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.1em 0.4em;
+  }
+
+  /* ── Sticker reference grid ── */
+  .sticker-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .sticker-grid__header,
+  .sticker-grid__row {
+    display: grid;
+    grid-template-columns: 7rem repeat(5, 1fr);
+    align-items: center;
+  }
+
+  .sticker-grid__header {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .sticker-grid__row {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .sticker-grid__row:last-child { border-bottom: none; }
+  .sticker-grid__row:hover { background: var(--color-bg); }
+
+  .sg-col-label {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .sg-row-label {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    font-family: ui-monospace, monospace;
+    color: var(--color-text-muted);
+  }
+
+  .sg-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-2) 0;
+  }
+
+  /* ── Size demo ── */
+  .size-demo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .size-demo__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-4) var(--space-6);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .size-demo__label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    min-width: 3rem;
+  }
+
+  .size-demo__label code {
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.1em 0.4em;
+  }
+
+  .size-demo__stickers {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  /* ── Prose demo wrapper ── */
+  .ks-prose-demo {
+    padding: var(--space-8);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  /* ── Code block ── */
+  .ks-code {
+    background: #1a1a1a;
+    color: #f8f7f4;
+    padding: var(--space-6);
+    border-radius: var(--radius-md);
+    font-family: ui-monospace, monospace;
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    overflow-x: auto;
+    white-space: pre;
+  }
+</style>
