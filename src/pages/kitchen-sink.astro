@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GraphicSticker from '../components/GraphicSticker.astro';
 import Sticker from '../components/Sticker.astro';
+import robotSticker from '../images/stickers/robot.png';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -216,19 +217,50 @@ const sizes    = ['sm','md','lg'] as const;
 
       <!-- ── Section 7: PNG sticker usage ───────────────── -->
       <section class="ks-section">
-        <h2 class="ks-section__title">7 — Using a PNG sticker</h2>
+        <h2 class="ks-section__title">7 — PNG sticker: robot.png</h2>
         <p class="ks-section__desc">
-          Upload a PNG to <code>src/images/stickers/</code> on GitHub, then in any <code>.mdx</code> file:
+          PNG stickers go in <code>src/images/stickers/</code>. Astro optimises them
+          (resize → WebP → fingerprint). The <code>color</code> prop has no effect — colour lives in the image itself.
         </p>
-        <pre class="ks-code"><code>{`import GraphicSticker from '../../components/GraphicSticker.astro';
-import myBadge from '../../images/stickers/my-badge.png';
 
-<GraphicSticker src={myBadge} size="lg" rotate={-5} />`}</code></pre>
-        <p class="ks-section__desc" style="margin-top: 1rem;">
-          PNGs are processed through Astro's image pipeline: resized, converted to WebP, and fingerprinted for caching.
-          The <code>color</code> prop has no effect on raster images — use the image itself for colour.
-          A subtle <code>drop-shadow</code> is applied automatically.
-        </p>
+        <!-- Live size demos -->
+        <div class="size-demo" style="margin-bottom: var(--space-8);">
+          {sizes.map(size => (
+            <div class="size-demo__row">
+              <span class="size-demo__label"><code>{size}</code></span>
+              <span class="size-demo__stickers">
+                <GraphicSticker src={robotSticker} size={size} rotate={-6} alt="Robot" />
+                <GraphicSticker src={robotSticker} size={size} rotate={5} alt="Robot" />
+                <GraphicSticker src={robotSticker} size={size} rotate={-10} alt="Robot" />
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <!-- In headings -->
+        <div class="prose ks-prose-demo" style="margin-bottom: var(--space-8);">
+          <h1><GraphicSticker src={robotSticker} size="lg" rotate={-8} alt="Robot" /> AI-powered strategy</h1>
+          <h2><GraphicSticker src={robotSticker} rotate={5} alt="Robot" /> The brief</h2>
+          <h3><GraphicSticker src={robotSticker} size="sm" rotate={-4} alt="Robot" /> What the machine did</h3>
+          <p>
+            The team had access to every AI tool on the market
+            <GraphicSticker src={robotSticker} size="sm" rotate={8} alt="Robot" />
+            but no consistent framework for deciding when to use them — or when not to.
+            The output wasn't always <strong>right</strong>, but it was always <em>useful</em>.
+          </p>
+        </div>
+
+        <!-- Usage code -->
+        <pre class="ks-code"><code>{`import robotSticker from '../../images/stickers/robot.png';
+
+// In headings
+<h2><GraphicSticker src={robotSticker} rotate={5} alt="Robot" /> The brief</h2>
+
+// Inline in text (use size="sm")
+<GraphicSticker src={robotSticker} size="sm" rotate={-6} alt="Robot" />
+
+// Large, standalone
+<GraphicSticker src={robotSticker} size="lg" rotate={-10} alt="Robot" />`}</code></pre>
       </section>
 
       <!-- ── Section 8: OpenMoji stickers ──────────────────── -->
