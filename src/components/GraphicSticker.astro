@@ -128,8 +128,13 @@ const svgDef = name ? svgLibrary[name] : null;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: var(--g-size);
-    height: var(--g-size);
+    /* The icon takes up ~60% of the box; padding creates the white border */
+    width: calc(var(--g-size) * 1.55);
+    height: calc(var(--g-size) * 1.55);
+    padding: calc(var(--g-size) * 0.28);
+    background: #ffffff;
+    border-radius: calc(var(--g-size) * 0.35);
+    box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.12);
     color: var(--g-color);
     transform: rotate(var(--g-rotate));
     transform-origin: center;
@@ -150,6 +155,7 @@ const svgDef = name ? svgLibrary[name] : null;
     width: 100%;
     height: 100%;
     display: block;
+    flex-shrink: 0;
   }
 
   /* PNG / raster images */
@@ -157,7 +163,5 @@ const svgDef = name ? svgLibrary[name] : null;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* Images don't get tinted — drop-shadow instead */
-    filter: drop-shadow(1px 2px 0 rgba(0,0,0,0.15));
   }
 </style>
