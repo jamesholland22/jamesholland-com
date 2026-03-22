@@ -3,89 +3,169 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import GraphicSticker from '../components/GraphicSticker.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-
-const links = [
-  { label: 'LinkedIn',  href: 'https://linkedin.com/in/jamesholland' },
-  { label: 'Bluesky',   href: 'https://bsky.app/profile/jamesholland.com' },
-  { label: 'Threads',   href: 'https://www.threads.net/@jamesholland' },
-  { label: 'X',         href: 'https://x.com/jamesholland' },
-];
 ---
 
 <BaseLayout
   title="About"
-  description="I live in New York, ordering bagels with a British accent for over ten years."
+  description="I started my career in journalism. Not by writing, but by running."
 >
-  <section class="about">
+  <div class="about">
+
+    <!-- Hero -->
+    <div class="about__hero container">
+      <a href={`${base}/`} class="about__back">← All work</a>
+      <h1 class="about__title">About <GraphicSticker name="sparkle" color="yellow" size="lg" rotate={12} /></h1>
+    </div>
+
+    <!-- Narrative body -->
     <div class="container container--narrow">
+      <div class="prose about__prose">
 
-      <h1 class="about__heading">
-        I live in New York, ordering bagels with a British accent for over ten years.
-        <GraphicSticker name="heart" color="pink" size="lg" rotate={-8} />
-      </h1>
+        <h2><GraphicSticker name="wave" color="pink" /> Roots in writing</h2>
 
-      <div class="about__links">
-        {links.map(link => (
-          <a href={link.href} class="about__link" target="_blank" rel="noopener noreferrer">
-            {link.label} →
-          </a>
-        ))}
+        <p>I started my career in journalism. Not by writing, but by running. It was 1998, I was 16 years old and I had just bagged a job as a copy runner at a newspaper office. Reporters could still smoke cigarettes in the office, only one computer had an email account and while the digital publishing revolution was ramping up, there was still good money to be made carrying notes, transparencies, and cups of tea around the office by hand.</p>
+
+        <p>I learned about publishing workflows by watching the masters do it at breakneck speed, and without an internet connection. By age 17 I knew the difference between leading, tracking and kerning, and had become hooked on the thrill of a newsroom marching to the beat of a printing press.</p>
+
+        <p>Inspired and undeterred by the late nights and early mornings, I left the newspaper to study Multi-Media Journalism at Bournemouth University. I learned to apply structure to my writing, the legal intricacies of court reporting (which I dodged for the remainder of my writing career) and the torturous art of note-taking in shorthand.</p>
+
+        <p>From here, it was a short hop to online publishing, magazine and newspaper journalism. I smashed together my early experiences in print with a passion for tech and gadgetry. I wrote for business, technology and lifestyle titles, and popped up as a talking head on TV and radio shows almost every week.</p>
+
+        <p>I loved every second of it, but in 2007 a new opportunity emerged.</p>
+
+        <h2><GraphicSticker name="arrow" color="orange" /> Moving to marketing</h2>
+
+        <p>Content Marketing was the latest buzzword in business. I joined a fledgling agency as its first full-time employee and embarked on a true startup adventure. We were one of the UK's very first agencies specializing in content for brands across web pages and social posts. Later we expanded to video, web development and influencer work, always building on journalistic principles: Know your audience, tell them original stories and keep them hooked by any means necessary.</p>
+
+        <p>When the company was acquired by a PR firm I had the opportunity to see media relations from the other side of the fence, and learned how valuable the very top of the marketing funnel could be.</p>
+
+        <p>I learned to understand messaging and narrative, built programs that spanned the full breadth of the marcomms stack and even dusted off my press card to play journalist during media trainings.</p>
+
+        <p>I moved to New York in 2015, and since then I've pitched, won and partnered with clients including Microsoft, Cisco, IBM, Intuit, Mercedes Benz, Vodafone, Telefonica, Lenovo, ZTE and Finnair.</p>
+
+        <p>And next, who knows? Since you're reading this, maybe we should <a href="mailto:hello@jamesholland.com">talk about that</a>.</p>
+
+      </div>
+    </div>
+
+    <!-- Lists: industry + awards -->
+    <div class="container about__lists">
+
+      <div class="about__list-card">
+        <h3 class="about__list-heading">
+          <GraphicSticker name="circle" color="blue" size="sm" /> Industry experience
+        </h3>
+        <ul class="about__list">
+          <li>FinTech &amp; Financial Services</li>
+          <li>eCommerce &amp; Online Marketplaces</li>
+          <li>Software development &amp; AI</li>
+          <li>Healthcare &amp; Pharmaceuticals</li>
+          <li>Cybersecurity and SecOps</li>
+          <li>Non-Profit</li>
+        </ul>
       </div>
 
-      <div class="about__work-link">
-        <a href={`${base}/`}>See my work ↓</a>
+      <div class="about__list-card">
+        <h3 class="about__list-heading">
+          <GraphicSticker name="star" color="yellow" size="sm" /> Glittering awards
+        </h3>
+        <ul class="about__list">
+          <li>PRovoke Digital Agency Of The Year 2023</li>
+          <li>PR Week Best In B2B</li>
+          <li>PR Week Dashboard 25 — AI Edition</li>
+          <li>Propel 100</li>
+        </ul>
       </div>
 
     </div>
-  </section>
+
+  </div>
 </BaseLayout>
 
 <style>
   .about {
-    padding-top: var(--space-24);
+    padding-top: var(--space-16);
     padding-bottom: var(--space-32);
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
   }
 
-  .about__heading {
-    font-size: var(--text-3xl);
-    line-height: 1.2;
-    max-width: 18ch;
-    margin-bottom: var(--space-12);
-    letter-spacing: -0.03em;
+  /* ── Hero ── */
+  .about__hero {
+    margin-bottom: var(--space-16);
   }
 
-  .about__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-8);
-    margin-bottom: var(--space-12);
-  }
-
-  .about__link {
-    font-size: var(--text-base);
-    font-weight: 500;
-    color: var(--color-text-muted);
-    transition: color var(--transition-fast);
-  }
-
-  .about__link:hover {
-    color: var(--color-text);
-  }
-
-  .about__work-link {
+  .about__back {
+    display: inline-block;
     font-size: var(--text-sm);
     font-weight: 500;
     color: var(--color-text-muted);
-  }
-
-  .about__work-link a {
+    margin-bottom: var(--space-6);
     transition: color var(--transition-fast);
   }
+  .about__back:hover { color: var(--color-text); }
 
-  .about__work-link a:hover {
-    color: var(--color-text);
+  .about__title {
+    font-size: var(--text-4xl);
+    line-height: 1.1;
+  }
+
+  /* ── Prose ── */
+  .about__prose {
+    font-size: var(--text-lg);
+  }
+
+  /* ── Lists ── */
+  .about__lists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    margin-top: var(--space-16);
+    max-width: var(--max-width-prose);
+  }
+
+  .about__list-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+
+  .about__list-heading {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .about__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .about__list li {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    padding-left: var(--space-4);
+    position: relative;
+  }
+
+  .about__list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-border);
+  }
+
+  @media (max-width: 600px) {
+    .about__lists {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
