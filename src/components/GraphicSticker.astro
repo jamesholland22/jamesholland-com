@@ -11,6 +11,8 @@ interface Props {
   name?: StickerName;
   /** Or supply an imported PNG/image (import myImg from '…/stickers/x.png') */
   src?: ImageMetadata;
+  /** Or paste any emoji — renders via OpenMoji CDN */
+  emoji?: string;
   color?: StickerColor;
   size?: StickerSize;
   rotate?: number;
@@ -18,7 +20,18 @@ interface Props {
   alt?: string;
 }
 
-const { name, src, color = 'yellow', size = 'md', rotate, alt = '' } = Astro.props;
+const { name, src, emoji, color = 'yellow', size = 'md', rotate, alt = '' } = Astro.props;
+
+// ─── OpenMoji helper ─────────────────────────────────────────────────────────
+// Converts an emoji character to its jsDelivr-hosted OpenMoji SVG URL.
+// Handles single codepoints, multi-codepoint sequences (flags, ZWJ), and
+// variation selectors — all included verbatim as OpenMoji expects them.
+function emojiToOpenMojiUrl(e: string): string {
+  const codes = [...e].map(char => char.codePointAt(0)!.toString(16).toUpperCase());
+  return `https://cdn.jsdelivr.net/npm/openmoji@16.0.0/color/svg/${codes.join('-')}.svg`;
+}
+
+const emojiUrl = emoji ? emojiToOpenMojiUrl(emoji) : null;
 
 // ─── SVG library ────────────────────────────────────────────────────────────
 // All shapes use currentColor so the `color` prop drives the tint.
@@ -105,7 +118,7 @@ const defaultRotations: Partial<Record<StickerName, number>> = {
   'uk-flag': -8, laptop: 5, pencil: 0,
 };
 
-const finalRotate = rotate ?? (name ? (defaultRotations[name] ?? 0) : 0);
+const finalRotate = rotate ?? (name ? (defaultRotations[name] ?? 0) : emoji ? -6 : 0);
 
 const sizeMap: Record<StickerSize, string> = {
   sm: '1.25em',
@@ -151,6 +164,9 @@ const svgDef = name ? svgLibrary[name] : null;
       height={96}
       class="g-sticker__img"
     />
+  )}
+  {emojiUrl && (
+    <img src={emojiUrl} alt={alt || emoji} class="g-sticker__img" loading="lazy" />
   )}
 </span>
 

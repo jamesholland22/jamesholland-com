@@ -231,6 +231,65 @@ import myBadge from '../../images/stickers/my-badge.png';
         </p>
       </section>
 
+      <!-- ── Section 8: OpenMoji stickers ──────────────────── -->
+      <section class="ks-section">
+        <h2 class="ks-section__title">8 — OpenMoji stickers</h2>
+        <p class="ks-section__desc">
+          Pass any emoji character to the <code>emoji</code> prop — it loads the matching
+          <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> SVG from jsDelivr.
+          Same white border, same sizing, same hover wobble as all other stickers.
+          The <code>color</code> prop has no effect (emoji use their own colours).
+        </p>
+
+        <div class="emoji-demo">
+          <div class="emoji-demo__item">
+            <GraphicSticker emoji="🗽" alt="Statue of Liberty" />
+            <span class="emoji-demo__label">🗽</span>
+          </div>
+          <div class="emoji-demo__item">
+            <GraphicSticker emoji="🏆" size="md" rotate={8} alt="Trophy" />
+            <span class="emoji-demo__label">🏆</span>
+          </div>
+          <div class="emoji-demo__item">
+            <GraphicSticker emoji="🚀" size="md" rotate={-10} alt="Rocket" />
+            <span class="emoji-demo__label">🚀</span>
+          </div>
+          <div class="emoji-demo__item">
+            <GraphicSticker emoji="🎨" size="md" rotate={5} alt="Palette" />
+            <span class="emoji-demo__label">🎨</span>
+          </div>
+          <div class="emoji-demo__item">
+            <GraphicSticker emoji="📰" size="md" rotate={-4} alt="Newspaper" />
+            <span class="emoji-demo__label">📰</span>
+          </div>
+          <div class="emoji-demo__item">
+            <GraphicSticker emoji="☕" size="md" rotate={6} alt="Coffee" />
+            <span class="emoji-demo__label">☕</span>
+          </div>
+          <div class="emoji-demo__item">
+            <GraphicSticker emoji="🎸" size="md" rotate={-8} alt="Guitar" />
+            <span class="emoji-demo__label">🎸</span>
+          </div>
+          <div class="emoji-demo__item">
+            <GraphicSticker emoji="🌍" size="md" rotate={4} alt="Globe" />
+            <span class="emoji-demo__label">🌍</span>
+          </div>
+          <div class="emoji-demo__item">
+            <GraphicSticker emoji="🎯" size="lg" rotate={-5} alt="Bullseye" />
+            <span class="emoji-demo__label">🎯 lg</span>
+          </div>
+          <div class="emoji-demo__item">
+            <GraphicSticker emoji="💡" size="sm" rotate={10} alt="Light bulb" />
+            <span class="emoji-demo__label">💡 sm</span>
+          </div>
+        </div>
+
+        <p class="ks-section__desc" style="margin-top: var(--space-8);">Usage in any <code>.astro</code> or <code>.mdx</code> file:</p>
+        <pre class="ks-code"><code>{`<GraphicSticker emoji="🏆" size="lg" rotate={8} alt="Trophy" />
+<GraphicSticker emoji="🚀" />
+<GraphicSticker emoji="🇬🇧" alt="UK flag" />`}</code></pre>
+      </section>
+
     </div><!-- /ks-body -->
   </div><!-- /ks-page -->
 </BaseLayout>
@@ -406,6 +465,31 @@ import myBadge from '../../images/stickers/my-badge.png';
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
+  }
+
+  /* ── OpenMoji demo ── */
+  .emoji-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    align-items: flex-end;
+    padding: var(--space-8);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .emoji-demo__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .emoji-demo__label {
+    font-size: var(--text-xs);
+    font-family: ui-monospace, monospace;
+    color: var(--color-text-muted);
   }
 
   /* ── Code block ── */
