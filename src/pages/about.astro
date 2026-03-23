@@ -164,26 +164,31 @@ const services: { label: string; color: StickerColor; items: string[] }[] = [
   .about__back:hover { color: var(--color-text); }
 
   .about__hero-inner {
-    display: flex;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
     gap: var(--space-8);
   }
 
   .about__title {
     font-size: var(--text-4xl);
     line-height: 1.1;
-    flex: 1;
   }
 
   .about__hero-sticker {
-    flex-shrink: 0;
-    font-size: 8.25rem; /* 3× original: 8.25 × 2.75em ≈ 360px */
+    display: flex;
+    justify-content: center;
+    /* font-size drives the em-based sticker size — fills roughly half the container */
+    font-size: clamp(4rem, 13vw, 10rem);
   }
 
   @media (max-width: 600px) {
     .about__hero-inner {
-      flex-direction: column;
-      align-items: flex-start;
+      grid-template-columns: 1fr;
+    }
+    .about__hero-sticker {
+      font-size: clamp(2rem, 40vw, 6rem);
+      justify-content: flex-start;
     }
   }
 

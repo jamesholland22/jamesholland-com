@@ -142,6 +142,9 @@ const colorMap: Record<StickerColor, string> = {
 };
 
 const svgDef = name ? svgLibrary[name] : null;
+
+// Output resolution for raster images — scales with size so large stickers stay sharp
+const imgWidthMap: Record<StickerSize, number> = { sm: 160, md: 300, lg: 800 };
 ---
 
 <!--
@@ -182,8 +185,7 @@ const svgDef = name ? svgLibrary[name] : null;
       <Image
         src={src}
         alt={alt}
-        width={96}
-        height={96}
+        width={imgWidthMap[size]}
         class="g-sticker__img"
       />
     )}
