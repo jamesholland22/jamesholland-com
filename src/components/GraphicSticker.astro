@@ -144,43 +144,53 @@ const colorMap: Record<StickerColor, string> = {
 const svgDef = name ? svgLibrary[name] : null;
 ---
 
-<!-- SVG stickers use feMorphology-based outline; raster uses Gaussian blur outline.
-     variant="holo" adds interactive rainbow hue-shift + 3D perspective tilt. -->
+<!--
+  Holo stickers need the 3D tilt separated from the colour filter.
+  Browsers flatten perspective transforms on elements that also have a CSS
+  filter. The fix: a wrapper span owns the tilt, the inner span owns the filter.
+
+  For non-holo stickers the wrapper uses display:contents — zero layout impact.
+-->
 <span
-  class:list={[
-    'g-sticker',
-    (src || emojiUrl) ? 'g-sticker--raster' : 'g-sticker--vector',
-    variant === 'holo' && 'g-sticker--holo',
-  ]}
-  style={`--g-color:${colorMap[color]};--g-size:${sizeMap[size]};--g-rotate:${finalRotate}deg`}
-  aria-hidden={alt ? undefined : 'true'}
-  role={alt ? 'img' : undefined}
-  aria-label={alt || undefined}
+  class:list={['g-holo-wrap', variant === 'holo' && 'g-holo-wrap--active']}
+  style={variant === 'holo' ? `--g-rotate:${finalRotate}deg` : undefined}
 >
-  {svgDef && svgDef.raw && (
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" set:html={svgDef.markup} />
-  )}
-  {svgDef && !svgDef.raw && (
-    <svg
-      viewBox="0 0 24 24"
-      fill={svgDef.filled ? 'currentColor' : 'none'}
-      stroke={svgDef.filled ? 'none' : 'currentColor'}
-      xmlns="http://www.w3.org/2000/svg"
-      set:html={svgDef.markup}
-    />
-  )}
-  {src && (
-    <Image
-      src={src}
-      alt={alt}
-      width={96}
-      height={96}
-      class="g-sticker__img"
-    />
-  )}
-  {emojiUrl && (
-    <img src={emojiUrl} alt={alt || emoji} class="g-sticker__img" loading="lazy" />
-  )}
+  <span
+    class:list={[
+      'g-sticker',
+      (src || emojiUrl) ? 'g-sticker--raster' : 'g-sticker--vector',
+      variant === 'holo' && 'g-sticker--holo',
+    ]}
+    style={`--g-color:${colorMap[color]};--g-size:${sizeMap[size]};--g-rotate:${variant === 'holo' ? '0deg' : `${finalRotate}deg`}`}
+    aria-hidden={alt ? undefined : 'true'}
+    role={alt ? 'img' : undefined}
+    aria-label={alt || undefined}
+  >
+    {svgDef && svgDef.raw && (
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" set:html={svgDef.markup} />
+    )}
+    {svgDef && !svgDef.raw && (
+      <svg
+        viewBox="0 0 24 24"
+        fill={svgDef.filled ? 'currentColor' : 'none'}
+        stroke={svgDef.filled ? 'none' : 'currentColor'}
+        xmlns="http://www.w3.org/2000/svg"
+        set:html={svgDef.markup}
+      />
+    )}
+    {src && (
+      <Image
+        src={src}
+        alt={alt}
+        width={96}
+        height={96}
+        class="g-sticker__img"
+      />
+    )}
+    {emojiUrl && (
+      <img src={emojiUrl} alt={alt || emoji} class="g-sticker__img" loading="lazy" />
+    )}
+  </span>
 </span>
 
 <style>
@@ -239,97 +249,117 @@ const svgDef = name ? svgLibrary[name] : null;
     object-fit: contain;
   }
 
-  /* ── Holo variant ────────────────────────────────────────────────────────
-     Mouse tracking (JS below) updates --holo-* CSS vars on mousemove.
-     hue-rotate() cycles the icon colours through the rainbow; white (the
-     outline) is achromatic so it stays white regardless of hue rotation.
-     perspective + rotateX/Y adds the 3D tilt without a wrapper element.
-     Transition is controlled by JS: fast during tracking, slow on leave. */
+  /* ── Holo wrapper ────────────────────────────────────────────────────────
+     The wrapper owns the 3D tilt; the inner .g-sticker owns the filter.
+     Separating them is necessary because browsers flatten perspective
+     transforms on elements that also carry a CSS filter property.
 
-  .g-sticker--vector.g-sticker--holo {
+     Non-holo: display:contents makes the wrapper invisible to layout.
+     Holo:     display:inline-flex + perspective transform + will-change. */
+
+  .g-holo-wrap {
+    display: contents; /* transparent to layout when not active */
+  }
+
+  .g-holo-wrap--active {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    position: relative;
+    top: -0.05em;
+    flex-shrink: 0;
+    cursor: default;
+    user-select: none;
+    will-change: transform;
+    /* 3D tilt driven by --holo-rx / --holo-ry set by JS */
+    transform:
+      rotate(var(--g-rotate, 0deg))
+      perspective(220px)
+      rotateX(var(--holo-ry, 0deg))
+      rotateY(var(--holo-rx, 0deg));
+  }
+
+  /* Inner sticker inside active wrapper: reset its own positioning so the
+     wrapper's layout properties take over */
+  .g-holo-wrap--active .g-sticker {
+    vertical-align: unset;
+    top: 0;
+    /* Disable the default rotation + wobble — wrapper handles everything */
+    transform: none;
+    will-change: filter;
+    transition: filter 0.06s ease;
+  }
+  .g-holo-wrap--active .g-sticker:hover {
+    transform: none;
+  }
+
+  /* Holo colour filter chain on the inner sticker only */
+  .g-holo-wrap--active .g-sticker--vector {
     filter:
       url(#sticker-outline-svg)
       hue-rotate(var(--holo-hue, 0deg))
       brightness(var(--holo-bright, 1))
       saturate(var(--holo-sat, 1))
       var(--g-shadow);
-    transform:
-      rotate(var(--g-rotate))
-      perspective(220px)
-      rotateX(var(--holo-ry, 0deg))
-      rotateY(var(--holo-rx, 0deg));
   }
 
-  .g-sticker--raster.g-sticker--holo {
+  .g-holo-wrap--active .g-sticker--raster {
     filter:
       url(#sticker-outline)
       hue-rotate(var(--holo-hue, 0deg))
       brightness(var(--holo-bright, 1))
       saturate(var(--holo-sat, 1))
       var(--g-shadow);
-    transform:
-      rotate(var(--g-rotate))
-      perspective(220px)
-      rotateX(var(--holo-ry, 0deg))
-      rotateY(var(--holo-rx, 0deg));
-  }
-
-  /* Disable the default wobble for holo — JS drives the effect instead */
-  .g-sticker--holo:hover {
-    transform:
-      rotate(var(--g-rotate))
-      perspective(220px)
-      rotateX(var(--holo-ry, 0deg))
-      rotateY(var(--holo-rx, 0deg));
   }
 </style>
 
 <script>
-  // Holographic sticker: mouse tracking drives hue, brightness, 3D tilt.
-  // Runs on every page load including ViewTransitions client-side navigations.
+  // Holographic sticker — JS updates CSS vars on the wrapper (3D tilt) and
+  // the inner sticker (colour). Runs on every page-load incl. ViewTransitions.
   function initHoloStickers() {
-    document.querySelectorAll<HTMLElement>('.g-sticker--holo').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        // Fast response during tracking
-        el.style.transition = 'transform 0.06s ease, filter 0.06s ease';
+    document.querySelectorAll<HTMLElement>('.g-holo-wrap--active').forEach(wrapper => {
+      const inner = wrapper.querySelector<HTMLElement>('.g-sticker');
+
+      wrapper.addEventListener('mouseenter', () => {
+        wrapper.style.transition = 'transform 0.06s ease';
       });
 
-      el.addEventListener('mousemove', (e: MouseEvent) => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left)  / r.width;   // 0 → 1 left to right
-        const y = (e.clientY - r.top)   / r.height;  // 0 → 1 top to bottom
+      wrapper.addEventListener('mousemove', (e: MouseEvent) => {
+        const r = wrapper.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;   // 0 → 1
+        const y = (e.clientY - r.top)  / r.height;  // 0 → 1
 
-        // Hue shifts 0–360° across the horizontal axis
-        const hue    = Math.round(x * 360);
-        // Brightness peaks in the centre (specular highlight simulation)
-        const bright = (0.88 + (0.5 - Math.abs(x - 0.5)) * 0.52).toFixed(2);
-        // Saturation peaks in the centre too
-        const sat    = (1.1  + (0.5 - Math.abs(x - 0.5)) * 0.7).toFixed(2);
-        // Tilt: ±26° based on cursor position relative to element centre
-        const rx     = ((x - 0.5) *  26).toFixed(1);
-        const ry     = ((y - 0.5) * -26).toFixed(1);
+        // 3D tilt on wrapper (no filter here → perspective works correctly)
+        wrapper.style.setProperty('--holo-rx', `${((x - 0.5) *  26).toFixed(1)}deg`);
+        wrapper.style.setProperty('--holo-ry', `${((y - 0.5) * -26).toFixed(1)}deg`);
 
-        el.style.setProperty('--holo-hue',    `${hue}deg`);
-        el.style.setProperty('--holo-bright', bright);
-        el.style.setProperty('--holo-sat',    sat);
-        el.style.setProperty('--holo-rx',     `${rx}deg`);
-        el.style.setProperty('--holo-ry',     `${ry}deg`);
+        // Colour effects on inner sticker (hue cycles 0-360° left→right)
+        if (inner) {
+          inner.style.setProperty('--holo-hue',    `${Math.round(x * 360)}deg`);
+          inner.style.setProperty('--holo-bright', (0.88 + (0.5 - Math.abs(x - 0.5)) * 0.52).toFixed(2));
+          inner.style.setProperty('--holo-sat',    (1.1  + (0.5 - Math.abs(x - 0.5)) * 0.70).toFixed(2));
+        }
       });
 
-      el.addEventListener('mouseleave', () => {
+      wrapper.addEventListener('mouseleave', () => {
         // Slow spring-back on leave
-        el.style.transition = 'transform 0.55s ease, filter 0.45s ease';
-        el.style.setProperty('--holo-hue',    '0deg');
-        el.style.setProperty('--holo-bright', '1');
-        el.style.setProperty('--holo-sat',    '1');
-        el.style.setProperty('--holo-rx',     '0deg');
-        el.style.setProperty('--holo-ry',     '0deg');
-        // Clear inline transition after it finishes so CSS takes back control
-        setTimeout(() => { el.style.transition = ''; }, 600);
+        wrapper.style.transition = 'transform 0.55s ease';
+        wrapper.style.setProperty('--holo-rx', '0deg');
+        wrapper.style.setProperty('--holo-ry', '0deg');
+        if (inner) {
+          inner.style.transition = 'filter 0.45s ease';
+          inner.style.setProperty('--holo-hue',    '0deg');
+          inner.style.setProperty('--holo-bright', '1');
+          inner.style.setProperty('--holo-sat',    '1');
+        }
+        setTimeout(() => {
+          wrapper.style.transition = '';
+          if (inner) inner.style.transition = '';
+        }, 600);
       });
     });
   }
 
-  // Run on initial load and after every ViewTransitions navigation
   document.addEventListener('astro:page-load', initHoloStickers);
 </script>
