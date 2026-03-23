@@ -9,6 +9,33 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const stickers = ['star','sparkle','burst','arrow','check','circle','lightning','heart','plus','wave','empire-state','liberty','big-ben','uk-flag','laptop','pencil'] as const;
 const colors   = ['yellow','pink','green','blue','orange'] as const;
 const sizes    = ['sm','md','lg'] as const;
+
+const fm = '---';
+const exampleCaseStudy = `${fm}
+title: "Messaging framework for an enterprise SaaS rebrand"
+client: "Acme Corp"
+year: 2024
+tags: ["Messaging", "B2B", "Brand strategy"]
+summary: "Repositioned a 200-person SaaS business for the enterprise market."
+category: "Client work"
+featured: true
+order: 1
+draft: false
+${fm}
+
+## The brief
+
+Write your case study here using standard Markdown.
+**Bold**, *italic*, lists, blockquotes — all styled by the .prose class.
+
+## What I did
+
+...
+
+## The outcome
+
+> "A short pull quote from the client goes in a blockquote."
+— Client name, Job title`;
 ---
 
 <BaseLayout title="Kitchen Sink — Design Reference">
@@ -372,6 +399,63 @@ const sizes    = ['sm','md','lg'] as const;
 <GraphicSticker emoji="🏆" size="lg" alt="Trophy" variant="holo" />`}</code></pre>
       </section>
 
+      <!-- ── Section 10: Content guide ──────────────────────── -->
+      <section class="ks-section">
+        <h2 class="ks-section__title">10 — Adding & editing case studies</h2>
+        <p class="ks-section__desc">
+          Each case study is a Markdown file in <code>src/content/work/</code>. The filename becomes the URL slug —
+          e.g. <code>messaging-framework.md</code> → <code>/work/messaging-framework</code>.
+        </p>
+
+        <!-- Frontmatter reference -->
+        <h3 class="ks-subsection__title">Frontmatter fields</h3>
+        <table class="ks-table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Type</th>
+              <th>Required</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>title</code></td><td>string</td><td>✓</td><td>Shown in card and page heading</td></tr>
+            <tr><td><code>client</code></td><td>string</td><td>✓</td><td>Shown in card meta</td></tr>
+            <tr><td><code>year</code></td><td>number</td><td>✓</td><td>e.g. <code>2024</code></td></tr>
+            <tr><td><code>tags</code></td><td>string[]</td><td>✓</td><td>e.g. <code>["Messaging", "B2B"]</code></td></tr>
+            <tr><td><code>summary</code></td><td>string</td><td>✓</td><td>One-line card teaser</td></tr>
+            <tr><td><code>category</code></td><td>enum</td><td>–</td><td><code>"Client work"</code> · <code>"Agency tools &amp; tech"</code> · <code>"Side projects"</code>. Defaults to Client work.</td></tr>
+            <tr><td><code>coverImage</code></td><td>string</td><td>–</td><td>URL or omit. Local images not yet wired up to cards.</td></tr>
+            <tr><td><code>featured</code></td><td>boolean</td><td>–</td><td><code>true</code> = pinned to top of its category section</td></tr>
+            <tr><td><code>order</code></td><td>number</td><td>–</td><td>Manual sort within category. Lower = earlier.</td></tr>
+            <tr><td><code>draft</code></td><td>boolean</td><td>–</td><td><code>true</code> = hidden from the site entirely</td></tr>
+            <tr><td><code>protected</code></td><td>boolean</td><td>–</td><td><code>true</code> = reserved for future password gate</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Full example file -->
+        <h3 class="ks-subsection__title" style="margin-top: var(--space-10);">Example file</h3>
+        <pre class="ks-code"><code>{exampleCaseStudy}</code></pre>
+
+        <!-- Categories -->
+        <h3 class="ks-subsection__title" style="margin-top: var(--space-10);">Categories</h3>
+        <p class="ks-section__desc">The home page groups work by category in this order:</p>
+        <ol class="ks-list">
+          <li><code>"Client work"</code> — client projects (default)</li>
+          <li><code>"Agency tools &amp; tech"</code> — internal tools, AI work, operational projects</li>
+          <li><code>"Side projects"</code> — personal work, experiments</li>
+        </ol>
+
+        <!-- Tips -->
+        <h3 class="ks-subsection__title" style="margin-top: var(--space-10);">Tips</h3>
+        <ul class="ks-list">
+          <li>Set <code>draft: true</code> to hide a case study without deleting it</li>
+          <li>Use <code>featured: true</code> + <code>order: 1</code> to pin a card to the top of its section</li>
+          <li>Slug = filename (minus <code>.md</code>) — keep filenames lowercase, hyphenated, no spaces</li>
+          <li>Push to <code>main</code> to deploy — GitHub Actions builds and publishes automatically</li>
+        </ul>
+      </section>
+
     </div><!-- /ks-body -->
   </div><!-- /ks-page -->
 </BaseLayout>
@@ -584,6 +668,74 @@ const sizes    = ['sm','md','lg'] as const;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
+  }
+
+  /* ── Content guide ── */
+  .ks-subsection__title {
+    font-size: var(--text-base);
+    font-weight: 700;
+    margin-bottom: var(--space-4);
+  }
+
+  .ks-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .ks-table thead {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .ks-table th,
+  .ks-table td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+
+  .ks-table tr:last-child td { border-bottom: none; }
+
+  .ks-table th {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+  }
+
+  .ks-table td code,
+  .ks-table th code {
+    font-family: ui-monospace, monospace;
+    font-size: 0.88em;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.1em 0.35em;
+  }
+
+  .ks-list {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    padding-left: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .ks-list code {
+    font-family: ui-monospace, monospace;
+    font-size: 0.88em;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.1em 0.35em;
   }
 
   /* ── Code block ── */
