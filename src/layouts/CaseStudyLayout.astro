@@ -4,6 +4,11 @@ import PasswordGate from '../components/PasswordGate.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
+function withBase(path?: string) {
+  if (!path || path.startsWith('http')) return path;
+  return `${base}${path}`;
+}
+
 interface NavEntry {
   title: string;
   slug: string;
@@ -16,6 +21,7 @@ interface Props {
   year: number;
   tags: string[];
   coverImage?: string;
+  coverVideo?: string;
   summary: string;
   protected?: boolean;
   category?: string;
@@ -24,7 +30,7 @@ interface Props {
 }
 
 const {
-  title, client, year, tags, coverImage, summary,
+  title, client, year, tags, coverImage, coverVideo, summary,
   protected: isProtected = false,
   category,
   prev,
@@ -55,16 +61,29 @@ const {
 
     <!-- Cover image + body — gated if protected -->
     <PasswordGate enabled={isProtected}>
-      {coverImage && (
+      {(coverVideo || coverImage) && (
         <div class="case-study__cover-wrap">
           <div class="container">
-            <img
-              src={coverImage}
-              alt={`Cover image for ${title}`}
-              class="case-study__cover"
-              loading="lazy"
-              transition:name={`cover-${Astro.params.slug}`}
-            />
+            {coverVideo ? (
+              <video
+                src={withBase(coverVideo)}
+                class="case-study__cover"
+                autoplay
+                muted
+                loop
+                playsinline
+                aria-label={`Cover video for ${title}`}
+                transition:name={`cover-${Astro.params.slug}`}
+              />
+            ) : (
+              <img
+                src={withBase(coverImage)}
+                alt={`Cover image for ${title}`}
+                class="case-study__cover"
+                loading="lazy"
+                transition:name={`cover-${Astro.params.slug}`}
+              />
+            )}
           </div>
         </div>
       )}

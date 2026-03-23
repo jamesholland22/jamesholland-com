@@ -9,6 +9,7 @@ const work = defineCollection({
     year: z.number().int().min(2000).max(2099),
     tags: z.array(z.string()),
     coverImage: z.string().optional(),
+    coverVideo: z.string().optional(), // path from /public e.g. /videos/foo.mp4
     summary: z.string(),
     category: z.enum(['Client work', 'Agency tools & tech', 'Side projects']).default('Client work'),
     featured: z.boolean().default(false),

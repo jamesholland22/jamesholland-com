@@ -1,6 +1,13 @@
 ---
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
+// Prefix local paths (starting with /) with the site base so they resolve
+// correctly on both local dev (base='/') and GitHub Pages (base='/jamesholland-com/')
+function withBase(path?: string) {
+  if (!path || path.startsWith('http')) return path;
+  return `${base}${path}`;
+}
+
 interface Props {
   slug: string;
   title: string;
@@ -8,18 +15,30 @@ interface Props {
   year: number;
   tags: string[];
   coverImage?: string;
+  coverVideo?: string;
   summary: string;
   featured?: boolean;
 }
 
-const { slug, title, client, year, tags, coverImage, summary } = Astro.props;
+const { slug, title, client, year, tags, coverImage, coverVideo, summary } = Astro.props;
 ---
 
-<a href={`${base}/work/${slug}`} class="card">
+<a href={`${base}/work/${slug}`} class="card" data-has-video={coverVideo ? 'true' : undefined}>
   <div class="card__image-wrap">
-    {coverImage ? (
+    {coverVideo ? (
+      <video
+        class="card__image card__video"
+        src={withBase(coverVideo)}
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label={title}
+        transition:name={`cover-${slug}`}
+      />
+    ) : coverImage ? (
       <img
-        src={coverImage}
+        src={withBase(coverImage)}
         alt={title}
         class="card__image"
         loading="lazy"
@@ -134,3 +153,16 @@ const { slug, title, client, year, tags, coverImage, summary } = Astro.props;
     background: var(--color-surface);
   }
 </style>
+
+<script>
+  // Play video thumbnails on hover, pause on leave
+  function initVideoCards() {
+    document.querySelectorAll<HTMLAnchorElement>('.card[data-has-video]').forEach(card => {
+      const video = card.querySelector<HTMLVideoElement>('.card__video');
+      if (!video) return;
+      card.addEventListener('mouseenter', () => { video.play().catch(() => {}); });
+      card.addEventListener('mouseleave', () => { video.pause(); });
+    });
+  }
+  document.addEventListener('astro:page-load', initVideoCards);
+</script>
