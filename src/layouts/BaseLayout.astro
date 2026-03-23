@@ -100,16 +100,18 @@ const fullTitle = title === 'James Holland' ? title : `${title} — James Hollan
 
         <!-- ── Raster / emoji / text sticker outline ────────────────────── -->
         <filter id="sticker-outline" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
-          <!-- 1. Blur the alpha channel to spread it smoothly -->
-          <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" />
-          <!-- 2. Threshold to solid white -->
+          <!-- 1. Dilate first for consistent thickness on raster edges -->
+          <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="dilated" />
+          <!-- 2. Blur the dilated shape to smooth pixel-level noise -->
+          <feGaussianBlur in="dilated" stdDeviation="2" result="blur" />
+          <!-- 3. Threshold to solid white -->
           <feColorMatrix in="blur" type="matrix"
             values="0 0 0 0 1
                     0 0 0 0 1
                     0 0 0 0 1
-                    0 0 0 18 -1.5"
+                    0 0 0 20 -2"
             result="outline" />
-          <!-- 3. Composite: white outline behind, original on top -->
+          <!-- 4. Composite: white outline behind, original on top -->
           <feMerge>
             <feMergeNode in="outline" />
             <feMergeNode in="SourceGraphic" />

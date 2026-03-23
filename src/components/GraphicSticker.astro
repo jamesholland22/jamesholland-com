@@ -2,9 +2,10 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
-type StickerColor = 'yellow' | 'pink' | 'green' | 'blue' | 'orange';
-type StickerName = 'star' | 'sparkle' | 'burst' | 'arrow' | 'check' | 'circle' | 'lightning' | 'heart' | 'plus' | 'wave' | 'empire-state' | 'liberty' | 'big-ben' | 'uk-flag' | 'laptop' | 'pencil';
-type StickerSize = 'sm' | 'md' | 'lg';
+type StickerColor   = 'yellow' | 'pink' | 'green' | 'blue' | 'orange';
+type StickerName    = 'star' | 'sparkle' | 'burst' | 'arrow' | 'check' | 'circle' | 'lightning' | 'heart' | 'plus' | 'wave' | 'empire-state' | 'liberty' | 'big-ben' | 'uk-flag' | 'laptop' | 'pencil';
+type StickerSize    = 'sm' | 'md' | 'lg';
+type StickerVariant = 'default' | 'holo';
 
 interface Props {
   /** Pick a built-in SVG sticker by name */
@@ -18,9 +19,15 @@ interface Props {
   rotate?: number;
   /** Accessible label — omit for purely decorative use */
   alt?: string;
+  /**
+   * Visual variant.
+   * 'holo' — holographic effect: icon colours cycle through the rainbow and
+   *           the sticker tilts in 3D as the cursor moves across it.
+   */
+  variant?: StickerVariant;
 }
 
-const { name, src, emoji, color = 'yellow', size = 'md', rotate, alt = '' } = Astro.props;
+const { name, src, emoji, color = 'yellow', size = 'md', rotate, alt = '', variant = 'default' } = Astro.props;
 
 // ─── OpenMoji helper ─────────────────────────────────────────────────────────
 // Converts an emoji character to its jsDelivr-hosted OpenMoji SVG URL.
@@ -137,10 +144,14 @@ const colorMap: Record<StickerColor, string> = {
 const svgDef = name ? svgLibrary[name] : null;
 ---
 
-<!-- SVG stickers use 8-directional drop-shadow (crisp vector edges).
-     Raster stickers (emoji, PNG) use the Gaussian blur SVG filter (smooth on pixels). -->
+<!-- SVG stickers use feMorphology-based outline; raster uses Gaussian blur outline.
+     variant="holo" adds interactive rainbow hue-shift + 3D perspective tilt. -->
 <span
-  class:list={['g-sticker', (src || emojiUrl) ? 'g-sticker--raster' : 'g-sticker--vector']}
+  class:list={[
+    'g-sticker',
+    (src || emojiUrl) ? 'g-sticker--raster' : 'g-sticker--vector',
+    variant === 'holo' && 'g-sticker--holo',
+  ]}
   style={`--g-color:${colorMap[color]};--g-size:${sizeMap[size]};--g-rotate:${finalRotate}deg`}
   aria-hidden={alt ? undefined : 'true'}
   role={alt ? 'img' : undefined}
@@ -227,4 +238,98 @@ const svgDef = name ? svgLibrary[name] : null;
     height: 100%;
     object-fit: contain;
   }
+
+  /* ── Holo variant ────────────────────────────────────────────────────────
+     Mouse tracking (JS below) updates --holo-* CSS vars on mousemove.
+     hue-rotate() cycles the icon colours through the rainbow; white (the
+     outline) is achromatic so it stays white regardless of hue rotation.
+     perspective + rotateX/Y adds the 3D tilt without a wrapper element.
+     Transition is controlled by JS: fast during tracking, slow on leave. */
+
+  .g-sticker--vector.g-sticker--holo {
+    filter:
+      url(#sticker-outline-svg)
+      hue-rotate(var(--holo-hue, 0deg))
+      brightness(var(--holo-bright, 1))
+      saturate(var(--holo-sat, 1))
+      var(--g-shadow);
+    transform:
+      rotate(var(--g-rotate))
+      perspective(220px)
+      rotateX(var(--holo-ry, 0deg))
+      rotateY(var(--holo-rx, 0deg));
+  }
+
+  .g-sticker--raster.g-sticker--holo {
+    filter:
+      url(#sticker-outline)
+      hue-rotate(var(--holo-hue, 0deg))
+      brightness(var(--holo-bright, 1))
+      saturate(var(--holo-sat, 1))
+      var(--g-shadow);
+    transform:
+      rotate(var(--g-rotate))
+      perspective(220px)
+      rotateX(var(--holo-ry, 0deg))
+      rotateY(var(--holo-rx, 0deg));
+  }
+
+  /* Disable the default wobble for holo — JS drives the effect instead */
+  .g-sticker--holo:hover {
+    transform:
+      rotate(var(--g-rotate))
+      perspective(220px)
+      rotateX(var(--holo-ry, 0deg))
+      rotateY(var(--holo-rx, 0deg));
+  }
 </style>
+
+<script>
+  // Holographic sticker: mouse tracking drives hue, brightness, 3D tilt.
+  // Runs on every page load including ViewTransitions client-side navigations.
+  function initHoloStickers() {
+    document.querySelectorAll<HTMLElement>('.g-sticker--holo').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        // Fast response during tracking
+        el.style.transition = 'transform 0.06s ease, filter 0.06s ease';
+      });
+
+      el.addEventListener('mousemove', (e: MouseEvent) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left)  / r.width;   // 0 → 1 left to right
+        const y = (e.clientY - r.top)   / r.height;  // 0 → 1 top to bottom
+
+        // Hue shifts 0–360° across the horizontal axis
+        const hue    = Math.round(x * 360);
+        // Brightness peaks in the centre (specular highlight simulation)
+        const bright = (0.88 + (0.5 - Math.abs(x - 0.5)) * 0.52).toFixed(2);
+        // Saturation peaks in the centre too
+        const sat    = (1.1  + (0.5 - Math.abs(x - 0.5)) * 0.7).toFixed(2);
+        // Tilt: ±26° based on cursor position relative to element centre
+        const rx     = ((x - 0.5) *  26).toFixed(1);
+        const ry     = ((y - 0.5) * -26).toFixed(1);
+
+        el.style.setProperty('--holo-hue',    `${hue}deg`);
+        el.style.setProperty('--holo-bright', bright);
+        el.style.setProperty('--holo-sat',    sat);
+        el.style.setProperty('--holo-rx',     `${rx}deg`);
+        el.style.setProperty('--holo-ry',     `${ry}deg`);
+      });
+
+      el.addEventListener('mouseleave', () => {
+        // Slow spring-back on leave
+        el.style.transition = 'transform 0.55s ease, filter 0.45s ease';
+        el.style.setProperty('--holo-hue',    '0deg');
+        el.style.setProperty('--holo-bright', '1');
+        el.style.setProperty('--holo-sat',    '1');
+        el.style.setProperty('--holo-rx',     '0deg');
+        el.style.setProperty('--holo-ry',     '0deg');
+        // Clear inline transition after it finishes so CSS takes back control
+        setTimeout(() => { el.style.transition = ''; }, 600);
+      });
+    });
+  }
+
+  // Run on initial load and after every ViewTransitions navigation
+  document.addEventListener('astro:page-load', initHoloStickers);
+</script>

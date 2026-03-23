@@ -322,6 +322,56 @@ const sizes    = ['sm','md','lg'] as const;
 <GraphicSticker emoji="🇬🇧" alt="UK flag" />`}</code></pre>
       </section>
 
+      <!-- ── Section 9: Holo sticker effect ──────────────────── -->
+      <section class="ks-section">
+        <h2 class="ks-section__title">9 — Holographic sticker effect</h2>
+        <p class="ks-section__desc">
+          <code>variant="holo"</code> adds a rainbow hue-shift + 3D perspective tilt driven by
+          mouse position. The white outline stays white (achromatic = immune to hue-rotate).
+          Works on SVG stickers, PNG stickers, and emoji. Hover over any of these.
+        </p>
+
+        <!-- Holo SVG stickers at large size -->
+        <div class="holo-demo" style="margin-bottom: var(--space-8);">
+          <GraphicSticker name="burst"     color="yellow" size="lg" variant="holo" />
+          <GraphicSticker name="star"      color="pink"   size="lg" variant="holo" />
+          <GraphicSticker name="sparkle"   color="blue"   size="lg" variant="holo" />
+          <GraphicSticker name="lightning" color="orange" size="lg" variant="holo" />
+          <GraphicSticker name="heart"     color="pink"   size="lg" variant="holo" />
+        </div>
+
+        <!-- Holo PNG sticker -->
+        <div class="holo-demo" style="margin-bottom: var(--space-8);">
+          <GraphicSticker src={robotSticker} size="lg" rotate={-8} alt="Robot" variant="holo" />
+          <GraphicSticker src={robotSticker} size="md" rotate={5}  alt="Robot" variant="holo" />
+          <GraphicSticker emoji="🏆" size="lg" rotate={8}  alt="Trophy"  variant="holo" />
+          <GraphicSticker emoji="🚀" size="lg" rotate={-10} alt="Rocket" variant="holo" />
+        </div>
+
+        <!-- In headings -->
+        <div class="prose ks-prose-demo" style="margin-bottom: var(--space-8);">
+          <h1><GraphicSticker name="burst" color="yellow" size="lg" variant="holo" /> AI-powered strategy</h1>
+          <h2><GraphicSticker name="star" color="pink" variant="holo" /> Glittering awards</h2>
+          <h3><GraphicSticker src={robotSticker} size="sm" alt="Robot" variant="holo" /> The machine in the loop</h3>
+          <p>
+            Every sticker can go holographic — SVG
+            <GraphicSticker name="sparkle" color="blue" size="sm" variant="holo" />,
+            PNG <GraphicSticker src={robotSticker} size="sm" alt="Robot" variant="holo" />,
+            and emoji <GraphicSticker emoji="🎯" size="sm" alt="Target" variant="holo" /> alike.
+            Hover each one.
+          </p>
+        </div>
+
+        <pre class="ks-code"><code>{`<!-- SVG sticker -->
+<GraphicSticker name="burst" color="yellow" size="lg" variant="holo" />
+
+<!-- PNG sticker -->
+<GraphicSticker src={robotSticker} size="lg" alt="Robot" variant="holo" />
+
+<!-- Emoji sticker -->
+<GraphicSticker emoji="🏆" size="lg" alt="Trophy" variant="holo" />`}</code></pre>
+      </section>
+
     </div><!-- /ks-body -->
   </div><!-- /ks-page -->
 </BaseLayout>
@@ -522,6 +572,18 @@ const sizes    = ['sm','md','lg'] as const;
     font-size: var(--text-xs);
     font-family: ui-monospace, monospace;
     color: var(--color-text-muted);
+  }
+
+  /* ── Holo demo ── */
+  .holo-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    align-items: center;
+    padding: var(--space-8);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
   }
 
   /* ── Code block ── */
