@@ -75,7 +75,11 @@ const fullTitle = title === 'James Holland' ? title : `${title} — James Hollan
         Uses Gaussian blur alone: feMorphology on raster pixels produces noise;
         blur-then-threshold traces the smooth painted shape boundary instead.
     -->
-    <svg width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden">
+    <!-- Zero-size container keeps the SVG completely out of the layout flow.
+         position:absolute + width/height:0 + overflow:hidden prevents any
+         contribution to scroll width or document height. -->
+    <div aria-hidden="true" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden;pointer-events:none">
+    <svg width="0" height="0" focusable="false" style="display:block">
       <defs>
 
         <!-- ── SVG sticker outline ───────────────────────────────────────── -->
@@ -120,6 +124,7 @@ const fullTitle = title === 'James Holland' ? title : `${title} — James Hollan
 
       </defs>
     </svg>
+    </div>
     <Nav />
     <main>
       <slot />
