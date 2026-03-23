@@ -144,13 +144,13 @@ const services: { label: string; color: StickerColor; items: string[] }[] = [
 
 <style>
   .about {
-    padding-top: var(--space-8);
+    padding-top: var(--space-4);
     padding-bottom: var(--space-32);
   }
 
   /* ── Hero ── */
   .about__hero {
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-4);
   }
 
   .about__back {
@@ -178,8 +178,11 @@ const services: { label: string; color: StickerColor; items: string[] }[] = [
   .about__hero-sticker {
     display: flex;
     justify-content: center;
-    /* font-size drives the em-based sticker size — roughly matches title height */
-    font-size: clamp(3rem, 9vw, 7rem);
+    /* Negative margin-top = internal sticker padding (2.75em × 0.15 = 0.4125em)
+       so the visible photo top aligns with the title's first line */
+    margin-top: -0.4125em;
+    /* font-size drives the em-based sticker size */
+    font-size: clamp(3.5rem, 10vw, 9rem);
   }
 
   @media (max-width: 600px) {
@@ -194,8 +197,8 @@ const services: { label: string; color: StickerColor; items: string[] }[] = [
 
   /* ── Services ── */
   .about__services {
-    margin-bottom: var(--space-16);
-    padding-top: var(--space-6);
+    margin-bottom: var(--space-12);
+    padding-top: var(--space-4);
     border-top: 1px solid var(--color-border);
   }
 
@@ -205,7 +208,7 @@ const services: { label: string; color: StickerColor; items: string[] }[] = [
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-text-muted);
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-4);
   }
 
   .about__services-grid {
