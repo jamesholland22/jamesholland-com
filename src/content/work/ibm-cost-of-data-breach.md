@@ -7,7 +7,7 @@ coverImage: "/images/ibm-codb-cover.jpg"
 summary: "Led a three-year evolution of IBM's annual data breach report — from static PDF to interactive calculator to fully integrated campaign — driving a 140% uplift in visitors, 219% more leads, and an 86% increase in revenue."
 category: "Client work"
 featured: false
-order: 5
+order: 6
 draft: false
 ---
 

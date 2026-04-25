@@ -6,7 +6,7 @@ tags: ["Earned Media", "Interactive Content", "Data Visualisation", "Content Mar
 summary: "Interactive tools and a targeted media campaign for the world's most comprehensive board diversity study — doubling media coverage, driving a 600% increase in site visits, and converting campaign traffic into ongoing Egon Zehnder readers."
 category: "Client work"
 featured: false
-order: 8
+order: 7
 draft: false
 ---
 

@@ -6,7 +6,7 @@ tags: ["Interactive Content", "Earned Media", "Data Visualisation", "Content Mar
 summary: "Three years transforming SolarWinds' annual IT industry report from a static PDF into an interactive data tool — consistently driving 5x more media coverage than static assets, with reporters embedding the experience directly in their coverage."
 category: "Client work"
 featured: false
-order: 7
+order: 3
 draft: false
 ---
 

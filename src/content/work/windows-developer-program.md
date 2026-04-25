@@ -6,7 +6,7 @@ tags: ["Social Media", "Content Strategy", "Paid Social", "Audience Growth"]
 summary: "Three-year social and content programme that grew the Windows developer audience from 15,000 to 1.1 million followers — while cutting cost per conversion by 75% and delivering 150% year-on-year engagement growth."
 category: "Client work"
 featured: true
-order: 2
+order: 8
 draft: false
 ---
 

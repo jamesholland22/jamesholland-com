@@ -6,7 +6,7 @@ tags: ["Social Media", "Video", "SMB Marketing", "Paid Social"]
 summary: "A social video campaign driving QuickBooks app adoption with small business audiences — exceptional video completion rates, a 3.5% CTR nearly double the industry benchmark, and a measurable increase in app connections post-campaign."
 category: "Client work"
 featured: false
-order: 9
+order: 4
 draft: false
 ---
 
