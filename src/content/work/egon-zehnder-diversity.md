@@ -12,13 +12,13 @@ draft: false
 
 ## The challenge
 
-Egon Zehnder has been studying board and management diversity since 2004 — making their Global Board Diversity Analysis one of the longest-running and most authoritative datasets on the subject. The challenge was matching the sophistication of the research with a campaign smart enough to extract its full value. Board diversity is a global story, but the most compelling angles are often regional — what's happening in Germany is different from what's happening in Brazil or Japan. Static press releases couldn't tell all of those stories at once.
+Egon Zehnder has been studying board and management diversity since 2004, making their Global Board Diversity Analysis one of the longest-running and most authoritative datasets on the subject. The challenge was matching the sophistication of the research with an earned media campaign smart enough to extract its full value. Board diversity is a global story, but the most compelling angles are often regional. What's happening in Germany is different from what's happening in Brazil or Japan. Static press releases couldn't tell all of those stories at once.
 
-## What I did
+## My role: Integrated strategy
 
-We built an interactive analysis tool that let journalists, researchers, and business leaders explore the data themselves — slicing by region, country, industry, and board type. This wasn't just a better user experience. It was a fundamentally different media strategy: instead of one global story, we could offer every journalist a local angle, personalised to their readers.
+To expose the full depth of Egon Zehnder's work, we built an interactive analysis tool that let journalists, researchers, and business leaders explore the data themselves. By slicing the data into reports on regional, country, industry or organizational trends we unlocked a fundamentally different media strategy: Instead of one global story, we could offer every journalist a local angle, personalised to their readers. It was a better story, and a better experience.
 
-Alongside the interactive tool, we developed social content and a smart search campaign to drive qualified traffic to the experience. The goal was to give the landmark report the audience it deserved — not just a one-day press moment, but a sustained conversation.
+Alongside the interactive tool, we developed social content and a smart search campaign to drive qualified traffic to the experience. The goal was to give the landmark report the audience it deserved, not just a one-day bump in media attention, but a sustained conversation.
 
 ## The results
 
