@@ -1,0 +1,57 @@
+---
+// Component for embedding videos in case study markdown
+// Handles base URL automatically
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function withBase(path?: string) {
+  if (!path || path.startsWith('http')) return path;
+  return `${base}${path}`;
+}
+
+interface Props {
+  src: string;
+  title?: string;
+  controls?: boolean;
+  playsinline?: boolean;
+  autoplay?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+  [key: string]: any;
+}
+
+const {
+  src,
+  title = 'Video',
+  controls = true,
+  playsinline = true,
+  autoplay = false,
+  muted = false,
+  loop = false,
+  ...rest
+} = Astro.props;
+---
+
+<video
+  src={withBase(src)}
+  {controls}
+  {playsinline}
+  {autoplay}
+  {muted}
+  {loop}
+  aria-label={title}
+  class="case-study-video"
+  {...rest}
+>
+  Your browser doesn't support HTML5 video. Here is a <a href={withBase(src)}>link to the video</a> instead.
+</video>
+
+<style>
+  .case-study-video {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    margin: var(--space-8) 0;
+    display: block;
+    background: var(--color-surface);
+  }
+</style>
