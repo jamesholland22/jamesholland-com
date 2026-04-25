@@ -33,7 +33,7 @@ const { slug, title, client, year, tags, coverImage, coverVideo, summary } = Ast
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="auto"
         aria-label={title}
         transition:name={`cover-${slug}`}
       />
@@ -164,13 +164,18 @@ const { slug, title, client, year, tags, coverImage, coverVideo, summary } = Ast
 </style>
 
 <script>
-  // Play video thumbnails on hover, pause on leave
+  // Autoplay video thumbnails once they've loaded enough to play
   function initVideoCards() {
-    document.querySelectorAll<HTMLAnchorElement>('.card[data-has-video]').forEach(card => {
-      const video = card.querySelector<HTMLVideoElement>('.card__video');
-      if (!video) return;
-      card.addEventListener('mouseenter', () => { video.play().catch(() => {}); });
-      card.addEventListener('mouseleave', () => { video.pause(); });
+    document.querySelectorAll<HTMLVideoElement>('.card__video').forEach(video => {
+      // If already ready, play immediately
+      if (video.readyState >= 3) {
+        video.play().catch(() => {});
+        return;
+      }
+      // Otherwise wait for enough data to play smoothly
+      video.addEventListener('canplaythrough', () => {
+        video.play().catch(() => {});
+      }, { once: true });
     });
   }
   document.addEventListener('astro:page-load', initVideoCards);
