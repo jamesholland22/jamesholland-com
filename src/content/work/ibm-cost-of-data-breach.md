@@ -13,13 +13,13 @@ draft: false
 
 ## The challenge
 
-IBM's annual Cost of a Data Breach study, produced in partnership with the Ponemon Institute, is one of the most widely cited pieces of research in the cybersecurity industry. For years, the format had been the same: a static PDF, country variants, a press push. The data was compelling. The experience of using it wasn't.
+IBM's annual Cost of a Data Breach study, produced in partnership with the Ponemon Institute, is one of the most widely cited pieces of research in the cybersecurity industry. For years, the format had been the same: a static PDF, country variants and a PR push that focused on point-in-time press coverage. The data was compelling. The experience of using it wasn't.
 
-The research contained far more signal than a PDF could surface. Breach costs vary dramatically by country, by industry, and by the specific risk factors present in any given organisation. Flattening all of that into a single static document meant most of the value was invisible — to journalists, to prospects, and to IBM's own security teams.
+When asked to reimagine it, my team discovered the underlying research contained far more value than a PDF could surface. Breach costs vary dramatically by country, by industry, and by the specific risk factors present in any given organisation. Flattening all of that into a single static document meant most of the nuance was lost - to journalists, to prospective customers, and to IBM's own security teams.
 
-IBM asked us to change that.
+When we showed them the value they were keeping locked away, IBM asked us to change that.
 
-## What I did
+## My role: Content and UX Strategy
 
 I led the programme across three consecutive years, with each cycle building on the last — pushing the research further from a document into a fully integrated campaign platform.
 
