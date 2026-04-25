@@ -3,7 +3,7 @@ title: "Launching Walmart Business"
 client: "Walmart"
 year: 2024
 tags: ["Earned Media", "Content Marketing", "Thought Leadership", "Lifecycle Marketing", "Brand Strategy", "Marketing Operations"]
-coverImage: "/images/wmb-poster.jpg"
+coverImage: "/images/wmb-poster.png"
 coverVideo: "/videos/wmb-thumb.mp4"
 summary: "Full-funnel launch strategy for Walmart's B2B commerce platform spanning earned media, content marketing, executive thought leadership, and lifecycle campaigns targeting small business and nonprofit customers."
 category: "Client work"

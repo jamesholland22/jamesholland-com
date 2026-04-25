@@ -11,7 +11,12 @@
       "Bash(curl --version)",
       "Bash(find '/Users/james/Documents/Claude Code/Personal website/src/pages' -name [slug]* -o -name *[*]*)",
       "Bash(cat)",
-      "Bash(node /tmp/generate-posters.js)"
+      "Bash(node /tmp/generate-posters.js)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(qlmanage -t -s 1600 -o /tmp/ \"/Users/james/Documents/Claude Code/Personal website/public/videos/wmb-thumb.mp4\")",
+      "Bash(qlmanage -t -s 1600 -o /tmp/ \"/Users/james/Documents/Claude Code/Personal website/public/videos/pitch-thumb.mp4\")",
+      "Bash(cp /tmp/wmb-thumb.mp4.png \"/Users/james/Documents/Claude Code/Personal website/public/images/wmb-poster.png\")",
+      "Bash(cp /tmp/pitch-thumb.mp4.png \"/Users/james/Documents/Claude Code/Personal website/public/images/pitch-poster.png\")"
     ]
   }
 }

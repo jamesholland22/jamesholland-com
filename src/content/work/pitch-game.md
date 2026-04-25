@@ -3,7 +3,7 @@ title: "Pitch! A game of clients & campaigns"
 client: "Text100"
 year: 2015
 tags: ["Game Design", "Learning & Development", "New Business", "Internal"]
-coverImage: "/images/pitch-poster.jpg"
+coverImage: "/images/pitch-poster.png"
 coverVideo: "/videos/pitch-thumb.mp4"
 summary: "A competitive mobile game for agency staff to practice answering client briefs and sharpen new business skills — launched globally as part of Text100's rebrand."
 category: "Agency tools & tech"
