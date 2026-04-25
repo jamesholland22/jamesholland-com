@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "/Users/james/.nvm/versions/node/v24.14.0/bin/npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 4321
+    },
+    {
+      "name": "preview",
+      "runtimeExecutable": "/Users/james/.nvm/versions/node/v24.14.0/bin/npm",
+      "runtimeArgs": ["run", "preview"],
+      "port": 4321
+    }
+  ]
+}
