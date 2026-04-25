@@ -16,7 +16,17 @@
       "Bash(qlmanage -t -s 1600 -o /tmp/ \"/Users/james/Documents/Claude Code/Personal website/public/videos/wmb-thumb.mp4\")",
       "Bash(qlmanage -t -s 1600 -o /tmp/ \"/Users/james/Documents/Claude Code/Personal website/public/videos/pitch-thumb.mp4\")",
       "Bash(cp /tmp/wmb-thumb.mp4.png \"/Users/james/Documents/Claude Code/Personal website/public/images/wmb-poster.png\")",
-      "Bash(cp /tmp/pitch-thumb.mp4.png \"/Users/james/Documents/Claude Code/Personal website/public/images/pitch-poster.png\")"
+      "Bash(cp /tmp/pitch-thumb.mp4.png \"/Users/james/Documents/Claude Code/Personal website/public/images/pitch-poster.png\")",
+      "Bash(sed -i '' 's/^order: 6$/order: 2/' src/content/work/conduent-lead-gen.md)",
+      "Bash(sed -i '' 's/^order: 7$/order: 3/' src/content/work/solarwinds-it-trends.md)",
+      "Bash(sed -i '' 's/^order: 9$/order: 4/' src/content/work/intuit-quickbooks.md)",
+      "Bash(sed -i '' 's/^order: 4$/order: 5/' src/content/work/mission-mars.md)",
+      "Bash(sed -i '' 's/^order: 5$/order: 6/' src/content/work/ibm-cost-of-data-breach.md)",
+      "Bash(npm --prefix '/Users/james/Documents/Claude Code/Personal website' run build)",
+      "Bash(npm run *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
