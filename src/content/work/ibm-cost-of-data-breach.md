@@ -2,8 +2,9 @@
 title: "IBM Cost of a Data Breach"
 client: "IBM"
 year: 2019
-tags: ["Earned Media", "Interactive Content", "Lead Generation", "B2B"]
-summary: "Three-year programme turning IBM's annual data breach research into an interactive digital experience — driving 39% more on-site engagement, 219% more validated leads, and an 86% increase in revenue from those leads."
+tags: ["Interactive Content", "Lead Generation", "Data Visualisation", "B2B", "Integrated Campaign"]
+coverImage: "/images/ibm-codb-cover.jpg"
+summary: "Led a three-year evolution of IBM's annual data breach report — from static PDF to interactive calculator to fully integrated campaign — driving a 140% uplift in visitors, 219% more leads, and an 86% increase in revenue."
 category: "Client work"
 featured: false
 order: 5
@@ -12,20 +13,29 @@ draft: false
 
 ## The challenge
 
-IBM's annual Cost of a Data Breach study, produced in partnership with the Ponemon Institute, is one of the most cited pieces of research in the cybersecurity industry. The data is compelling — but the format wasn't doing it justice. A static PDF and a press push were leaving most of the value on the table. IBM needed a way to make the research more interactive, more shareable, and more useful to the security professionals and business decision-makers it was trying to reach.
+IBM's annual Cost of a Data Breach study, produced in partnership with the Ponemon Institute, is one of the most widely cited pieces of research in the cybersecurity industry. For years, the format had been the same: a static PDF, country variants, a press push. The data was compelling. The experience of using it wasn't.
+
+The research contained far more signal than a PDF could surface. Breach costs vary dramatically by country, by industry, and by the specific risk factors present in any given organisation. Flattening all of that into a single static document meant most of the value was invisible — to journalists, to prospects, and to IBM's own security teams.
+
+IBM asked us to change that.
 
 ## What I did
 
-Starting in 2017, we redesigned the campaign around an interactive digital experience — giving users tools to explore the data themselves rather than simply read a summary. Alongside the interactive asset, we built a broader digital marketing programme to drive qualified traffic and convert it into validated leads.
+I led the programme across three consecutive years, with each cycle building on the last — pushing the research further from a document into a fully integrated campaign platform.
 
-The work marked an important strategic shift for the account: from pure PR and earned media into integrated digital marketing. Over three years, we pushed the boundaries of what the annual study could do, iterating on format and distribution with each cycle.
+**Year one: from PDF to calculator.** The first transformation was structural. We rebuilt the experience around a personalised calculator that let users tune the analysis to their own situation — selecting country, industry, and a range of organisation-specific cost factors such as incident response posture, encryption use, CISO appointment, and cloud migration exposure. The output was a real-time breach cost estimate, rendered through a data visualisation designed to make the number land.
+
+That personalisation was also the key to its media value. Verticalised, filterable data gave journalists a genuinely useful tool for localising the story — multiplying pitchable angles across sectors and geographies rather than forcing every outlet to run the same global average.
+
+**Year two: into storytelling.** With the interactive foundation proven, we pushed the campaign into richer editorial and narrative territory — developing content that contextualised the data and gave it staying power beyond the annual launch window. The digital marketing programme matured alongside it, with more sophisticated lead nurture and conversion flows.
+
+**Year three: socially integrated.** By the third year, the campaign had expanded to incorporate social amplification, supporting activity across IBM's owned channels and building the kind of earned reach that extended the research's visibility well past the initial news cycle. The calculator itself had grown to cover more languages and currencies, increasing its global utility.
+
+Throughout, the programme marked a strategic shift for the account — from pure PR into integrated digital marketing, and from a single annual asset into a platform that generated commercial return year-round.
 
 ## The results
 
-By the second year of the programme:
-
-- **+39% on-site engagements** versus the prior year
-- **219% increase in validated leads**
-- **86% increase in revenue** generated from those validated leads
-
-The Cost of a Data Breach programme became a template for how IBM approached research-driven campaigns across other practices — demonstrating that interactive digital assets consistently outperformed static ones for both engagement and commercial return.
+- **140% increase in unique visitors** to the Cost of a Data Breach landing page during the campaign, with the calculator as the top-performing asset
+- **219% increase in validated leads** year-on-year by the second year of the programme
+- **86% increase in revenue** generated from those leads
+- Referenced internally as **best practice for visualising industry data** across IBM, and subsequently expanded to cover more languages and currencies
