@@ -20,7 +20,7 @@ The launch of Walmart Business, a dedicated B2B platform for small businesses an
 
 The goal wasn't just awareness. It was trust. Proving that a B2B-focused brand from the world's most familiar retailer could establish real credibility in a crowded space.
 
-## The approach
+## My role: Integrated strategy
 
 The strategy built trust around six interconnected pillars, designed to reach small businesses across every stage of the funnel — from first awareness to loyal customer.
 
