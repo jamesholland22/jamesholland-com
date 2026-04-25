@@ -128,6 +128,18 @@ const {
   </article>
 </BaseLayout>
 
+<script define:vars={{ base }}>
+  // Fix video src paths in markdown content to include base URL
+  if (base) {
+    document.querySelectorAll('.case-study__body video').forEach(video => {
+      const src = video.getAttribute('src');
+      if (src && src.startsWith('/') && !src.startsWith(base)) {
+        video.setAttribute('src', `${base}${src}`);
+      }
+    });
+  }
+</script>
+
 <style>
   .case-study__hero {
     padding-top: var(--space-16);

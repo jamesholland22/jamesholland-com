@@ -1,11 +1,9 @@
 ---
-import CaseStudyVideo from '../../components/CaseStudyVideo.astro';
-
 title: "Pitch! A game of clients & campaigns"
 client: "Text100"
 year: 2015
 tags: ["Game Design", "Learning & Development", "New Business", "Internal"]
-coverImage: "/src/images/pitch-poster.jpg"
+coverImage: "/images/pitch-poster.jpg"
 coverVideo: "/videos/pitch-thumb.mp4"
 summary: "A competitive mobile game for agency staff to practice answering client briefs and sharpen new business skills — launched globally as part of Text100's rebrand."
 category: "Agency tools & tech"
@@ -25,7 +23,7 @@ The content was built around real-world brief types — from earned media and so
 
 *Pitch!* launched globally as part of the rebrand rollout, framing new business thinking as something you could get better at — and have fun doing it.
 
-<CaseStudyVideo src="/videos/pitch.mp4" title="Pitch! game demo video" />
+<video src="/videos/pitch.mp4" controls playsinline style="width:100%; border-radius: 16px; margin: 2rem 0; display: block; background: var(--color-surface);"></video>
 
 ## Why it worked
 
