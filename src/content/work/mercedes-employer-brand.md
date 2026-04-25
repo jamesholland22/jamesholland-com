@@ -3,6 +3,7 @@ title: "Mercedes-Benz Employer Brand"
 client: "Mercedes-Benz"
 year: 2019
 tags: ["Content Marketing", "Employer Brand", "Social Media", "Earned Media"]
+coverImage: "/images/mercedes-cover.jpg"
 summary: "A content strategy and social media programme helping Mercedes-Benz attract engineering talent in Silicon Valley — 11x audience growth, 90+ pieces of media coverage, and direct attribution of key hires to content activity."
 category: "Client work"
 featured: false
