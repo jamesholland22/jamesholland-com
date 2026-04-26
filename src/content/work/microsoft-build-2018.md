@@ -6,7 +6,7 @@ tags: ["Event Marketing", "Social Media", "Influencer", "Content Production"]
 summary: "Real-time social coverage and influencer programme for Microsoft's developer conference — turning a 6,500-person in-person event into 3 million video views, 45,000 shares, and a 285% spike in web traffic."
 category: "Client work"
 featured: false
-order: 9
+order: 10
 draft: false
 ---
 

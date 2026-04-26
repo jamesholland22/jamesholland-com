@@ -1,0 +1,182 @@
+---
+// VERSION 2 — Executive & board advisory positioning
+// Preview at /index-v2
+
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StickerHeading from '../components/StickerHeading.astro';
+import Sticker from '../components/Sticker.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+
+const CATEGORIES = ['Client work', 'Agency tools & tech', 'Side projects'] as const;
+
+const allWork = await getCollection('work', ({ data }) => !data.draft);
+
+const sortedWork = allWork.sort((a, b) => {
+  if (a.data.order !== undefined && b.data.order !== undefined) return a.data.order - b.data.order;
+  if (a.data.order !== undefined) return -1;
+  if (b.data.order !== undefined) return 1;
+  return b.data.year - a.data.year;
+});
+
+const byCategory = CATEGORIES
+  .map(cat => ({
+    category: cat,
+    id: cat.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, ''),
+    entries: sortedWork.filter(e => e.data.category === cat),
+  }))
+  .filter(g => g.entries.length > 0);
+---
+
+<BaseLayout
+  title="James Holland"
+  description="Strategic communications counsel for C-suite leaders and boards navigating AI, growth, and what comes next."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <StickerHeading
+        parts={[
+          { sticker: "Strategic counsel", color: "yellow", rotate: -2 },
+          " for technology companies navigating ",
+          { sticker: "AI, growth,", color: "pink", rotate: 2 },
+          " and what comes next."
+        ]}
+        as="h1"
+        class="hero__heading"
+      />
+      <p class="hero__bio">
+        I'm James Holland — EVP of Integrated Strategy at Highwire PR, and an advisor to
+        C-suite leaders and boards on communications strategy, AI positioning, and reputational
+        risk. I've helped shape how some of the world's most recognised technology companies
+        communicate through their most consequential moments. I also design the tools and
+        frameworks that keep those strategies ahead of what the market hasn't seen yet.
+      </p>
+      <div class="hero__links">
+        <a href="mailto:hello@jamesholland.com" class="hero__cta">Work with me</a>
+        <a href="https://www.linkedin.com/in/meet-james-holland/" class="hero__secondary">LinkedIn →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work sections -->
+  {byCategory.map(({ category, id, entries }) => (
+    <section class="work-section" id={id}>
+      <div class="container">
+        <h2 class="work-section__heading">
+          {category === 'Client work' && (
+            <Sticker label="CLIENT WORK" color="green" />
+          )}
+          {category === 'Agency tools & tech' && (
+            <>
+              <Sticker label="AGENCY TOOLS" color="blue" />
+              <Sticker label="& TECH" color="pink" rotate={-8} />
+            </>
+          )}
+          {category === 'Side projects' && (
+            <>
+              <Sticker label="SIDE" color="green" />
+              <Sticker label="PROJECTS" color="orange" rotate={6} />
+            </>
+          )}
+        </h2>
+        <div class="work-grid">
+          {entries.map((entry) => (
+            <CaseStudyCard
+              slug={entry.id.replace(/\.mdx?$/, '')}
+              title={entry.data.title}
+              client={entry.data.client}
+              year={entry.data.year}
+              tags={entry.data.tags}
+              coverImage={entry.data.coverImage}
+              coverVideo={entry.data.coverVideo}
+              summary={entry.data.summary}
+              featured={entry.data.featured}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-top: var(--space-24);
+    padding-bottom: var(--space-24);
+  }
+
+  .hero__heading {
+    max-width: 22ch;
+    margin-bottom: var(--space-8);
+  }
+
+  .hero__bio {
+    font-size: var(--text-lg);
+    max-width: 54ch;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-8);
+  }
+
+  .hero__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 0.65em 1.5em;
+    background: var(--color-text);
+    color: var(--color-bg);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    transition: opacity var(--transition-fast);
+  }
+
+  .hero__cta:hover { opacity: 0.8; }
+
+  .hero__secondary {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .hero__secondary:hover { color: var(--color-text); }
+
+  .work-section {
+    padding-bottom: var(--space-24);
+    scroll-margin-top: 6rem;
+  }
+
+  .work-section__heading {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12) var(--space-8);
+  }
+
+  @media (min-width: 40rem) {
+    .work-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 64rem) {
+    .work-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-12) var(--space-6);
+    }
+  }
+</style>

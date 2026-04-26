@@ -26,7 +26,29 @@
       "Bash(npm run *)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(sips -g pixelWidth -g pixelHeight ~/Downloads/image05.jpg)",
+      "Bash(sips -g pixelWidth -g pixelHeight ~/Downloads/mercedes-benz-na-stern-w1024xh512-cutout.jpg.webp)",
+      "Bash(sips -g all ~/Downloads/image05.jpg)",
+      "Bash(python3 -c \"from PIL import Image; print\\('PIL available'\\)\")",
+      "Bash(python3 -c \"import PIL\")",
+      "Bash(sips -g pixelWidth -g pixelHeight \"/Users/james/Documents/Claude Code/Personal website/public/images/mercedes-cover.jpg\")",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(pip install *)",
+      "Bash(pip3 install *)",
+      "Bash(python3 -m markitdown \"/Users/james/Downloads/Vanguard EA Case Study.pptx\")",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -sL \"https://jamesholland.com/assets/images/image15.jpg?v=ca3d326c\" -o /tmp/vanguard-source.jpg)",
+      "Read(//tmp/**)",
+      "Bash(sips -g pixelWidth -g pixelHeight /tmp/vanguard-source.jpg)",
+      "Bash(sips -c 312 555 /tmp/vanguard-source.jpg --out /tmp/vanguard-thumb.jpg)",
+      "Bash(sips -g pixelWidth -g pixelHeight /tmp/vanguard-thumb.jpg)",
+      "Bash(sed -i '' 's/^order: 2$/order: 3/' conduent-lead-gen.md)",
+      "Bash(sed -i '' 's/^order: 3$/order: 4/' solarwinds-it-trends.md)",
+      "Bash(sed -i '' 's/^order: 4$/order: 5/' intuit-quickbooks.md)",
+      "Bash(sed -i '' 's/^order: 5$/order: 6/' mission-mars.md)",
+      "Bash(sed -i '' 's/^order: 6$/order: 7/' ibm-cost-of-data-breach.md)"
     ]
   }
 }

@@ -1,0 +1,323 @@
+---
+// VERSION 1 — Refined agency positioning (elevated, adds PE + AI story, keeps personality)
+// Preview at /about-v1
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GraphicSticker from '../components/GraphicSticker.astro';
+import Sticker from '../components/Sticker.astro';
+import jamesAndFam from '../images/stickers/james-and-fam.jpg';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+type StickerColor = 'yellow' | 'pink' | 'green' | 'blue' | 'orange';
+
+const services: { label: string; color: StickerColor; items: string[] }[] = [
+  {
+    label: 'Strategy',
+    color: 'yellow',
+    items: [
+      'Brand positioning & messaging',
+      'Integrated campaign strategy',
+      'AI communications strategy',
+      'Executive visibility & thought leadership',
+      'Earned media & content strategy',
+      'Competitive & narrative intelligence',
+    ],
+  },
+  {
+    label: 'Advisory',
+    color: 'pink',
+    items: [
+      'C-suite communications counsel',
+      'Communications due diligence',
+      'Agency transformation & capability building',
+      'Workshops & training',
+    ],
+  },
+  {
+    label: 'Everything else',
+    color: 'green',
+    items: [
+      'Consulting & fractional strategy',
+      'Speaking',
+      'Tool & programme design',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="About"
+  description="James Holland — strategic communications and marketing leader with 20+ years across tech, AI, and integrated campaigns."
+>
+  <div class="about">
+
+    <!-- Hero -->
+    <div class="about__hero container">
+      <a href={`${base}/`} class="about__back">← All work</a>
+      <div class="about__hero-inner">
+        <div class="about__hero-text">
+          <h1 class="about__title">Strategist. Builder. The person in the room who asks the question nobody else did.</h1>
+          <p>Twenty years of communications, marketing and digital — built from a journalism foundation, sharpened at the world's largest agencies, and applied to some of the most recognised brands in technology.</p>
+          <p>Based in New York <GraphicSticker emoji="🗽" size="sm" rotate={7} alt="Statue of Liberty" />. Originally British <GraphicSticker emoji="🇬🇧" size="sm" rotate={3} alt="UK flag" />. Perpetually ordering the wrong bagel. <GraphicSticker emoji="🥯" size="sm" rotate={-4} alt="Bagel" /></p>
+        </div>
+        <div class="about__hero-sticker">
+          <GraphicSticker src={jamesAndFam} size="lg" rotate={6} alt="James and his family" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Services -->
+    <div class="container about__services">
+      <p class="about__services-eyebrow">What I do mostly fits in one of these buckets</p>
+      <div class="about__services-grid">
+        {services.map(({ label, color, items }) => (
+          <div class="about__service-col">
+            <div class="about__service-heading">
+              <Sticker label={label} color={color} rotate={-1} />
+            </div>
+            <ul class="about__service-list">
+              {items.map(item => <li>{item}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Narrative body -->
+    <div class="container container--narrow">
+      <div class="prose about__prose">
+
+        <h2><GraphicSticker name="wave" color="pink" /> Roots in writing</h2>
+
+        <p>I started my career in journalism. Not by writing, but by running. It was 1998, I was 16 years old and I had just bagged a job as a copy runner at a newspaper office. Reporters could still smoke cigarettes in the office, only one computer had an email account, and while the digital publishing revolution was ramping up, there was still good money to be made carrying notes, transparencies, and cups of tea around the office by hand.</p>
+
+        <p>By 17 I knew the difference between leading, tracking and kerning, and had become hooked on the thrill of a newsroom marching to the beat of a printing press. I studied Multi-Media Journalism at Bournemouth University, wrote for business, technology and lifestyle titles, and popped up as a talking head on TV and radio almost every week.</p>
+
+        <p>I loved every second of it. But in 2007, a new opportunity emerged.</p>
+
+        <h2><GraphicSticker name="arrow" color="orange" /> Moving to strategy</h2>
+
+        <p>I joined one of the UK's first content marketing agencies as its founding employee, building the practice from scratch across social, video, web and influencer work — always on journalistic principles: know your audience, tell original stories, keep them hooked. When the company was acquired by a PR firm I got a view from the other side of the media relations fence, and learned how valuable the top of the funnel could really be.</p>
+
+        <p>I moved to New York in 2015. Since then I've pitched, won and led programmes for clients including Microsoft, Cisco, IBM, Intuit, Walmart, Mercedes-Benz, Vodafone, Telefonica, Lenovo and NVIDIA. I've built integrated programmes that span earned media, content, digital, executive visibility and social — and I've built the tools and frameworks to make those programmes smarter.</p>
+
+        <h2><GraphicSticker name="star" color="yellow" /> Building things that matter</h2>
+
+        <p>One of the things I'm most proud of is the role I played in positioning Highwire for a strategic investment from a private equity firm. It wasn't just communications — it was the digital and integrated capabilities I built from the ground up that became central to the agency's value proposition and made the investment possible.</p>
+
+        <p>On the AI side, I've been doing the work others are still talking about doing. I work with some of the largest names in AI — including NVIDIA — on competitive analysis and market positioning. I designed and built the agency's first-party AI visibility assessment tools, and I created our model for deep, long-horizon media analysis: finding weak signals in the noise, identifying emerging narratives weeks before they become mainstream, and turning that intelligence into strategic advantage for clients.</p>
+
+        <p>And next, who knows? Since you're reading this, maybe we should <a href="mailto:hello@jamesholland.com">talk about that</a>.</p>
+
+      </div>
+    </div>
+
+    <!-- Lists: industry + awards -->
+    <div class="container about__lists">
+
+      <div class="about__list-card">
+        <h3 class="about__list-heading">
+          <GraphicSticker name="circle" color="blue" size="sm" /> Industry experience
+        </h3>
+        <ul class="about__list">
+          <li>AI & Emerging Technology</li>
+          <li>FinTech &amp; Financial Services</li>
+          <li>eCommerce &amp; Online Marketplaces</li>
+          <li>Software development &amp; Developer Tools</li>
+          <li>Healthcare &amp; Pharmaceuticals</li>
+          <li>Cybersecurity and SecOps</li>
+          <li>Non-Profit</li>
+        </ul>
+      </div>
+
+      <div class="about__list-card">
+        <h3 class="about__list-heading">
+          <GraphicSticker name="star" color="yellow" size="sm" /> Glittering awards
+        </h3>
+        <ul class="about__list">
+          <li>PRovoke Digital Agency Of The Year 2023</li>
+          <li>PR Week Best In B2B</li>
+          <li>PR Week Dashboard 25 — AI Edition</li>
+          <li>Propel 100</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .about {
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-32);
+  }
+
+  .about__hero { margin-bottom: var(--space-4); }
+
+  .about__back {
+    display: inline-block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    transition: color var(--transition-fast);
+  }
+  .about__back:hover { color: var(--color-text); }
+
+  .about__hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: var(--space-8);
+  }
+
+  .about__hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .about__title {
+    font-size: var(--text-4xl);
+    line-height: 1.1;
+  }
+
+  .about__hero-text p {
+    font-size: var(--text-lg);
+    line-height: 1.55;
+    color: var(--color-text-muted);
+  }
+
+  .about__hero-sticker {
+    display: flex;
+    justify-content: center;
+    margin-top: -0.4125em;
+    font-size: clamp(3.5rem, 10vw, 9rem);
+  }
+
+  @media (max-width: 600px) {
+    .about__hero-inner { grid-template-columns: 1fr; }
+    .about__hero-sticker {
+      font-size: clamp(2rem, 40vw, 6rem);
+      justify-content: flex-start;
+    }
+  }
+
+  .about__services {
+    margin-bottom: var(--space-12);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .about__services-eyebrow {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .about__services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+  }
+
+  .about__service-heading {
+    margin-bottom: var(--space-6);
+    font-size: 2.5rem;
+  }
+
+  .about__service-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .about__service-list li {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    padding-left: var(--space-4);
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .about__service-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-border);
+  }
+
+  @media (max-width: 800px) {
+    .about__services-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 500px) {
+    .about__services-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+  }
+
+  .about__prose { font-size: var(--text-lg); }
+
+  .about__lists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    margin-top: var(--space-16);
+    max-width: var(--max-width-prose);
+  }
+
+  .about__list-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+
+  .about__list-heading {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .about__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .about__list li {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    padding-left: var(--space-4);
+    position: relative;
+  }
+
+  .about__list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-border);
+  }
+
+  @media (max-width: 600px) {
+    .about__lists { grid-template-columns: 1fr; }
+  }
+</style>

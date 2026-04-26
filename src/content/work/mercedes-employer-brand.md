@@ -7,7 +7,7 @@ coverImage: "/images/mercedes-cover.jpg"
 summary: "A content strategy and social media programme helping Mercedes-Benz attract engineering talent in Silicon Valley — 11x audience growth, 90+ pieces of media coverage, and direct attribution of key hires to content activity."
 category: "Client work"
 featured: false
-order: 10
+order: 11
 draft: false
 ---
 
