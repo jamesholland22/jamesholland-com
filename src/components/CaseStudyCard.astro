@@ -20,10 +20,14 @@ interface Props {
   featured?: boolean;
 }
 
-const { slug, title, client, year, tags, coverImage, coverVideo, summary } = Astro.props;
+const { slug, title, client, year, tags, coverImage, coverVideo, summary, featured = false } = Astro.props;
 ---
 
-<a href={`${base}/work/${slug}`} class="card" data-has-video={coverVideo ? 'true' : undefined}>
+<a
+  href={`${base}/work/${slug}`}
+  class:list={['card', { 'card--featured': featured }]}
+  data-has-video={coverVideo ? 'true' : undefined}
+>
   <div class="card__image-wrap">
     {coverVideo ? (
       <video
@@ -102,6 +106,21 @@ const { slug, title, client, year, tags, coverImage, coverVideo, summary } = Ast
 
   .card:hover .card__image {
     transform: scale(1.05);
+  }
+
+  /* Featured cards span 2 columns once the grid is multi-column */
+  @media (min-width: 40rem) {
+    .card--featured {
+      grid-column: span 2;
+    }
+
+    .card--featured .card__title {
+      font-size: var(--text-xl);
+    }
+
+    .card--featured .card__summary {
+      -webkit-line-clamp: 3;
+    }
   }
 
   .card__body {
