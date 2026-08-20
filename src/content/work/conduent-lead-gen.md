@@ -3,6 +3,7 @@ title: "Conduent: Integrated Lead-Gen Campaign"
 client: "Conduent"
 year: 2020
 tags: ["Lead Generation", "Paid Social", "Earned Media", "Content Marketing"]
+coverImage: "/images/conduent-cover.jpg"
 summary: "A social-first lead-gen programme built around Conduent's Customer Experience of Urban Travel report — 200+ qualified leads, 10,000+ clicks, 20 media placements, and a new best-practice benchmark for integrated marketing at the company."
 category: "Client work"
 featured: false

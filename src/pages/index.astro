@@ -61,19 +61,13 @@ const byCategory = CATEGORIES
       <div class="container">
         <h2 class="work-section__heading">
           {category === 'Client work' && (
-            <Sticker label="CLIENT WORK" color="green" />
+            <Sticker label="CLIENT WORK" color="green" rotate={-1} />
           )}
           {category === 'Agency tools & tech' && (
-            <>
-              <Sticker label="AGENCY TOOLS" color="blue" />
-              <Sticker label="& TECH" color="pink" rotate={-8} />
-            </>
+            <Sticker label="AGENCY TOOLS & TECH" color="blue" rotate={-1} />
           )}
           {category === 'Side projects' && (
-            <>
-              <Sticker label="SIDE" color="green" />
-              <Sticker label="PROJECTS" color="orange" rotate={6} />
-            </>
+            <Sticker label="SIDE PROJECTS" color="orange" rotate={1} />
           )}
         </h2>
         <div class="work-grid">

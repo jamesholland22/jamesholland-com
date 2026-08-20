@@ -3,6 +3,7 @@ title: "Mission Mars: Developer Training Campaign"
 client: "Microsoft"
 year: 2019
 tags: ["Content Marketing", "Developer Marketing", "Experiential", "Global Campaign"]
+coverImage: "/images/mission-mars-cover.jpg"
 summary: "An interactive developer training campaign set on a colonised Mars — 59 workshops, nearly 1,000 hours of activity, some of the highest satisfaction scores in Microsoft history, and a special session at NASA's Johnson Space Center."
 category: "Client work"
 featured: false
