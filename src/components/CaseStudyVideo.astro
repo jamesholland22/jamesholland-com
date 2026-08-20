@@ -15,6 +15,7 @@ interface Props {
   autoplay?: boolean;
   muted?: boolean;
   loop?: boolean;
+  narrow?: boolean; // for portrait video: cap width and centre
 }
 
 const {
@@ -26,6 +27,7 @@ const {
   autoplay = false,
   muted = false,
   loop = false,
+  narrow = false,
 } = Astro.props;
 ---
 
@@ -48,7 +50,7 @@ const {
     muted={muted}
     loop={loop}
     aria-label={title}
-    class="case-study-video"
+    class:list={['case-study-video', { 'case-study-video--narrow': narrow }]}
   >
     Your browser doesn't support HTML5 video. Here is a <a href={withBase(src)}>link to the video</a> instead.
   </video>
@@ -61,6 +63,11 @@ const {
     margin: var(--space-8) 0;
     display: block;
     background: var(--color-surface);
+  }
+
+  .case-study-video--narrow {
+    max-width: 22rem;
+    margin-inline: auto;
   }
 
   .case-study-video-wrap {
