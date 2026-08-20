@@ -48,7 +48,9 @@
       "Bash(sed -i '' 's/^order: 3$/order: 4/' solarwinds-it-trends.md)",
       "Bash(sed -i '' 's/^order: 4$/order: 5/' intuit-quickbooks.md)",
       "Bash(sed -i '' 's/^order: 5$/order: 6/' mission-mars.md)",
-      "Bash(sed -i '' 's/^order: 6$/order: 7/' ibm-cost-of-data-breach.md)"
+      "Bash(sed -i '' 's/^order: 6$/order: 7/' ibm-cost-of-data-breach.md)",
+      "Bash(curl -sL \"https://img.youtube.com/vi/awTqf6oWhjU/maxresdefault.jpg\" -o /tmp/mobileiron-yt.jpg)",
+      "Bash(sips -g pixelWidth -g pixelHeight /tmp/mobileiron-yt.jpg)"
     ]
   }
 }
