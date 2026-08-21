@@ -30,10 +30,10 @@ const slug = agency?.toLowerCase();
     flex: 0 0 auto; /* never let flex parents squish the mark */
     opacity: 0.6;
     vertical-align: middle;
-    /* the middot's ink centre sits a hair below the flex centre-line;
-       match it so the wordmark body lines up with the dot */
+    /* mathematically the body centres on the middot at -0.06em, but it reads
+       too high; optically it sits better ~2.5px (at 12px) lower */
     position: relative;
-    top: -0.06em;
+    top: 0.15em;
   }
 
   /* canvas is 120px with a 50px letter-body band centred on it; 1.6em makes
