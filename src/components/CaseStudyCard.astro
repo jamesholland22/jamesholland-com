@@ -20,7 +20,7 @@ interface Props {
   coverVideo?: string;
   summary: string;
   featured?: boolean;
-  agency?: 'Highwire' | 'Archetype' | 'Wonderscript';
+  agency?: string;
 }
 
 const { slug, title, client, year, tags, coverImage, coverVideo, summary, featured = false, agency } = Astro.props;

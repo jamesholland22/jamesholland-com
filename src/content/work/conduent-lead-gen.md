@@ -1,6 +1,7 @@
 ---
 title: "Conduent: Integrated Lead-Gen Campaign"
 client: "Conduent"
+agency: "Text100"
 year: 2020
 tags: ["Lead Generation", "Paid Social", "Earned Media", "Content Marketing"]
 coverImage: "/images/conduent-cover.jpg"
