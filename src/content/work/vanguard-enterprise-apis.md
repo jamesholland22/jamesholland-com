@@ -1,6 +1,7 @@
 ---
 title: "Vanguard Enterprise Advice APIs"
 client: "Vanguard"
+agency: "Highwire"
 year: 2023
 tags: ["Product Marketing", "Brand Strategy", "Content Strategy", "UX Research", "B2B"]
 coverImage: "/images/vanguard-cover.jpg"

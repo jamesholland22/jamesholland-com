@@ -1,4 +1,6 @@
 ---
+import AgencyMark from './AgencyMark.astro';
+
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 // Prefix local paths (starting with /) with the site base so they resolve
@@ -18,9 +20,10 @@ interface Props {
   coverVideo?: string;
   summary: string;
   featured?: boolean;
+  agency?: 'Highwire' | 'Archetype' | 'Wonderscript';
 }
 
-const { slug, title, client, year, tags, coverImage, coverVideo, summary, featured = false } = Astro.props;
+const { slug, title, client, year, tags, coverImage, coverVideo, summary, featured = false, agency } = Astro.props;
 ---
 
 <a
@@ -59,6 +62,12 @@ const { slug, title, client, year, tags, coverImage, coverVideo, summary, featur
       <span class="card__client">{client}</span>
       <span class="card__sep" aria-hidden="true">·</span>
       <span class="card__year">{year}</span>
+      {agency && (
+        <>
+          <span class="card__sep" aria-hidden="true">·</span>
+          <AgencyMark agency={agency} />
+        </>
+      )}
     </div>
     <h2 class="card__title" transition:name={`title-${slug}`}>{title}</h2>
     <p class="card__summary">{summary}</p>
@@ -132,6 +141,7 @@ const { slug, title, client, year, tags, coverImage, coverVideo, summary, featur
 
   .card__meta {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: var(--space-2);
     font-size: var(--text-xs);

@@ -16,6 +16,7 @@ const work = defineCollection({
     order: z.number().optional(),
     draft: z.boolean().default(false),
     protected: z.boolean().default(false),
+    agency: z.enum(['Highwire', 'Archetype', 'Wonderscript']).optional(), // agency the work was done at
   }),
 });
 

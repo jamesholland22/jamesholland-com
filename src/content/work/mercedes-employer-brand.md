@@ -1,6 +1,7 @@
 ---
 title: "Mercedes-Benz Employer Brand"
 client: "Mercedes-Benz"
+agency: "Archetype"
 year: 2019
 tags: ["Content Marketing", "Employer Brand", "Social Media", "Earned Media"]
 coverImage: "/images/mercedes-cover.jpg"

@@ -1,0 +1,55 @@
+---
+// Small "for <agency logo>" attribution. Logos live in /public/images/agencies
+// as black-on-transparent PNGs normalised to the same height.
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+type Agency = 'Highwire' | 'Archetype' | 'Wonderscript';
+
+interface Props {
+  agency?: Agency;
+  size?: 'sm' | 'md';
+}
+
+const { agency, size = 'sm' } = Astro.props;
+const slug = agency?.toLowerCase();
+---
+
+{agency && (
+  <span class:list={['agency-mark', `agency-mark--${size}`]}>
+    <span class="agency-mark__for">for</span>
+    <img
+      src={`${base}/images/agencies/${slug}.png`}
+      alt={agency}
+      class="agency-mark__logo"
+      loading="lazy"
+    />
+  </span>
+)}
+
+<style>
+  .agency-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    white-space: nowrap;
+  }
+
+  .agency-mark__for {
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+
+  .agency-mark__logo {
+    display: inline-block;
+    width: auto;
+    flex: 0 0 auto; /* never let flex parents squish the mark */
+    opacity: 0.6;
+    vertical-align: middle;
+  }
+
+  .agency-mark--sm .agency-mark__logo { height: 0.95em; }
+  .agency-mark--md .agency-mark__logo { height: 1.1em; }
+</style>

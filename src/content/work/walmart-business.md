@@ -1,6 +1,7 @@
 ---
 title: "Launching Walmart Business"
 client: "Walmart"
+agency: "Highwire"
 year: 2024
 tags: ["Earned Media", "Content Marketing", "Thought Leadership", "Lifecycle Marketing", "Brand Strategy", "Marketing Operations"]
 coverImage: "/images/wmb-poster.png"

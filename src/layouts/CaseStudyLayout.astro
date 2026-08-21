@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import PasswordGate from '../components/PasswordGate.astro';
+import AgencyMark from '../components/AgencyMark.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -25,6 +26,7 @@ interface Props {
   summary: string;
   protected?: boolean;
   category?: string;
+  agency?: 'Highwire' | 'Archetype' | 'Wonderscript';
   prev?: NavEntry | null;
   next?: NavEntry | null;
 }
@@ -33,6 +35,7 @@ const {
   title, client, year, tags, coverImage, coverVideo, summary,
   protected: isProtected = false,
   category,
+  agency,
   prev,
   next,
 } = Astro.props;
@@ -55,7 +58,10 @@ const {
         </div>
         <h1 class="case-study__title" transition:name={`title-${Astro.params.slug}`}>{title}</h1>
         <p class="case-study__summary">{summary}</p>
-        <p class="case-study__byline">{client} &middot; {year}</p>
+        <p class="case-study__byline">
+          {client} &middot; {year}
+          {agency && <> &middot; <AgencyMark agency={agency} size="md" /></>}
+        </p>
       </div>
     </div>
 
