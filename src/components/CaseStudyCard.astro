@@ -27,6 +27,7 @@ const { slug, title, client, year, tags, coverImage, coverVideo, summary, featur
   href={`${base}/work/${slug}`}
   class:list={['card', { 'card--featured': featured }]}
   data-has-video={coverVideo ? 'true' : undefined}
+  data-tags={tags.join('|')}
 >
   <div class="card__image-wrap">
     {coverVideo ? (
