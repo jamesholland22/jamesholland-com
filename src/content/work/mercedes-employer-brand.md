@@ -10,6 +10,7 @@ category: "Client work"
 featured: true
 order: 5
 draft: false
+protected: true
 ---
 
 ## The challenge
