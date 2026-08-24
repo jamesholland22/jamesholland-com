@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import StickerHeading from '../components/StickerHeading.astro';
 import Sticker from '../components/Sticker.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
+import GraphicSticker from '../components/GraphicSticker.astro';
 
 const CATEGORIES = ['Client work', 'Agency tools & tech', 'Side projects'] as const;
 
@@ -105,6 +106,13 @@ const filterTags = [...tagCounts.entries()]
               agency={entry.data.agency}
             />
           ))}
+          {category === 'Client work' && (
+            <>
+              <div class="grid-filler" aria-hidden="true"><GraphicSticker name="star" color="yellow" rotate={-8} /></div>
+              <div class="grid-filler" aria-hidden="true"><GraphicSticker name="sparkle" color="pink" rotate={6} /></div>
+              <div class="grid-filler" aria-hidden="true"><GraphicSticker name="lightning" color="blue" rotate={-5} /></div>
+            </>
+          )}
         </div>
       </div>
     </section>
@@ -217,7 +225,22 @@ const filterTags = [...tagCounts.entries()]
     display: none;
   }
 
-  /* ── Work grid: 1 → 2 → 3 columns ───────────────────── */
+  /* Decorative fillers for masonry pockets — placed by JS, hidden otherwise */
+  .grid-filler {
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .work-grid.is-masonry .grid-filler.is-placed {
+    display: flex;
+  }
+
+  .grid-filler > :global(*) {
+    transform: scale(2.2);
+  }
+
+  /* ── Work grid: 1 → 2 → 3 columns, masonry-packed ────── */
   .work-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -236,9 +259,134 @@ const filterTags = [...tagCounts.entries()]
       gap: var(--space-12) var(--space-6);
     }
   }
+
+  /* Masonry mode (multi-column only): fine-grained implicit rows let JS give
+     each card a row-span matching its content, so short neighbours don't
+     leave holes beside tall featured cards. */
+  @media (min-width: 40rem) {
+    .work-grid.is-masonry {
+      grid-auto-rows: 8px;
+      grid-auto-flow: dense;
+      row-gap: 0;
+      align-items: start;
+    }
+
+    .work-grid.is-masonry :global(.card) {
+      margin-bottom: var(--space-12);
+    }
+  }
 </style>
 
 <script>
+  // Masonry packing: span each card across fine-grained implicit rows so
+  // cards flow up to fill gaps beside taller (featured) neighbours.
+  const ROW_UNIT = 8;
+
+  function layoutGrid(grid: HTMLElement) {
+    const nCols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+    grid.classList.toggle('is-masonry', nCols > 1);
+    const cards = [...grid.querySelectorAll<HTMLElement>('.card')];
+    if (nCols === 1) {
+      cards.forEach(c => { c.style.gridRow = ''; c.style.gridColumn = ''; });
+      return;
+    }
+    const margin = 48; // --space-12
+    const colHeights = new Array(nCols).fill(0);
+
+    // measure spans up front
+    const queue = cards
+      .filter(c => !c.classList.contains('card--filtered-out'))
+      .map(card => {
+        const kids = [...card.children] as HTMLElement[];
+        const h = kids[kids.length - 1].getBoundingClientRect().bottom - kids[0].getBoundingClientRect().top;
+        return {
+          card,
+          wide: card.classList.contains('card--featured') && nCols >= 2,
+          span: Math.max(1, Math.ceil((h + margin) / ROW_UNIT)),
+        };
+      });
+    cards.filter(c => c.classList.contains('card--filtered-out')).forEach(c => { c.style.gridRow = ''; c.style.gridColumn = ''; });
+
+    const placed: {c0: number; c1: number; r0: number; r1: number}[] = [];
+
+    const place = (item: typeof queue[0], col: number, start: number) => {
+      const rowStart = Math.floor(start / ROW_UNIT) + 1;
+      item.card.style.gridColumn = item.wide ? `${col + 1} / span 2` : `${col + 1}`;
+      item.card.style.gridRow = `${rowStart} / span ${item.span}`;
+      const bottom = rowStart - 1 + item.span;
+      placed.push({c0: col, c1: item.wide ? col + 1 : col, r0: rowStart, r1: bottom + 1});
+      colHeights[col] = bottom * ROW_UNIT;
+      if (item.wide) colHeights[col + 1] = bottom * ROW_UNIT;
+    };
+
+    while (queue.length) {
+      const item = queue[0];
+      if (item.wide) {
+        // best adjacent pair: lowest start, then least wasted hole
+        let col = 0, start = Infinity, waste = Infinity;
+        for (let i = 0; i <= nCols - 2; i++) {
+          const s = Math.max(colHeights[i], colHeights[i + 1]);
+          const w = Math.abs(colHeights[i] - colHeights[i + 1]);
+          if (s < start || (s === start && w < waste)) { start = s; waste = w; col = i; }
+        }
+        // if aligning the pair wastes real space, pull a later single card
+        // forward to fill the shorter column first
+        if (waste > 12 * ROW_UNIT) {
+          const shorter = colHeights[col] <= colHeights[col + 1] ? col : col + 1;
+          const fillerIdx = queue.findIndex((q, i) => i > 0 && !q.wide && q.span * ROW_UNIT <= waste + 8 * ROW_UNIT);
+          if (fillerIdx > 0) {
+            const filler = queue.splice(fillerIdx, 1)[0];
+            place(filler, shorter, colHeights[shorter]);
+            continue;
+          }
+        }
+        place(item, col, start);
+      } else {
+        let col = 0, best = Infinity;
+        for (let i = 0; i < nCols; i++) if (colHeights[i] < best) { best = colHeights[i]; col = i; }
+        place(item, col, best);
+      }
+      queue.shift();
+    }
+
+    // find leftover pockets from the final geometry and tuck stickers in
+    const holes: {col: number; startRow: number; endRow: number}[] = [];
+    for (let c = 0; c < nCols; c++) {
+      const intervals = placed.filter(p => p.c0 <= c && c <= p.c1).sort((a, b) => a.r0 - b.r0);
+      let cursor = 1;
+      for (const iv of intervals) {
+        if ((iv.r0 - cursor) * ROW_UNIT > 140) holes.push({col: c, startRow: cursor, endRow: iv.r0});
+        cursor = Math.max(cursor, iv.r1);
+      }
+    }
+    const fillers = [...grid.querySelectorAll<HTMLElement>('.grid-filler')];
+    fillers.forEach(f => f.classList.remove('is-placed'));
+    holes.slice(0, fillers.length).forEach((hole, i) => {
+      const f = fillers[i];
+      f.style.gridColumn = `${hole.col + 1}`;
+      f.style.gridRow = `${hole.startRow} / ${hole.endRow}`;
+      f.classList.add('is-placed');
+    });
+  }
+
+  function layoutAllGrids() {
+    document.querySelectorAll<HTMLElement>('.work-grid').forEach(layoutGrid);
+  }
+
+  let masonryRaf = 0;
+  function scheduleLayout() {
+    cancelAnimationFrame(masonryRaf);
+    masonryRaf = requestAnimationFrame(layoutAllGrids);
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    layoutAllGrids();
+    // re-pack once media/fonts settle and on resize
+    window.addEventListener('load', scheduleLayout, { once: true });
+    (document as any).fonts?.ready?.then(scheduleLayout);
+    window.addEventListener('resize', scheduleLayout);
+  });
+
   // Tag filter for the client-work grid
   function initWorkFilter() {
     const section = document.getElementById('client-work');
@@ -260,6 +408,7 @@ const filterTags = [...tagCounts.entries()]
           const show = filter === 'all' || tags.includes(filter!);
           card.classList.toggle('card--filtered-out', !show);
         });
+        scheduleLayout();
       });
     });
   }
