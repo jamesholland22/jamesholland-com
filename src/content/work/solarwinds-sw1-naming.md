@@ -1,0 +1,43 @@
+---
+title: "Naming SolarWinds' Agentic AI Platform"
+client: "SolarWinds"
+agency: "Highwire"
+year: 2026
+tags: ["Brand Strategy", "Naming", "Product Marketing", "B2B"]
+coverImage: "/images/sw1-naming-cover.jpg"
+summary: "A strategic naming sprint for SolarWinds' standalone agentic AI application — nearly 100 candidates generated, scored, and legally screened down to five viable finalists, from brief to clearance in under two weeks."
+category: "Client work"
+featured: false
+order: 0.5
+draft: true
+protected: true
+---
+
+## The challenge
+
+SolarWinds was preparing to launch a standalone agentic AI application — a step beyond the copilot-style assistant embedded in its products, built around agents, autonomy, and persistent goal pursuit. The name had to do heavy lifting: distinctive enough to stand fully apart, credible to ITOps and NetOps buyers, and durable enough to stretch from a single product launch to a cross-portfolio platform and, potentially, a standalone brand.
+
+The hardest constraint was conceptual: the name needed to signal a meaningful step up — moving the practitioner from a reactive operator buried in alerts to an outcome-owning orchestrator — without leaning on temporary AI terminology that would date it within a product cycle.
+
+And it all had to happen fast. The timeline from brief to final legal clearance: under two weeks.
+
+## What my team did
+
+I led ideation and grounding through a strategic framework and systematic process, keeping creative exploration anchored to what the name actually had to achieve.
+
+**Research sprint.** We grounded the work in the four Cs — Company, Category, Context, and Customer — a fast, structured pass across the organisation and its vision, the competitive category and outside inspiration, cultural trends, and the audiences the name had to win over. The output became the foundation for our naming criteria.
+
+**Naming territories.** Rather than brainstorming into a void, we developed five distinct naming territories — from seeing the whole system from above, to an unseen protective force that is always there — each with its own narrative logic. Territories gave the client a strategic choice about what the name should *mean* before debating what it should *be*.
+
+**Creative development.** Within the territories we generated nearly 100 candidate names, each supported by narrative and usage thinking — how it would sound in conversation, in a product UI, and alongside the existing SolarWinds brand voice.
+
+**Scoring framework.** Every serious candidate was scored through a six-criteria naming matrix — distinctive, evocative, trusted, timeless, viable, and on-brand — turning subjective debate into a comparable, defensible shortlist.
+
+**Due diligence and clearance.** We ran initial trademark searches within the relevant classes, including fuzzy matches and soundalikes, plus domain and global linguistic checks — reducing the field from almost 100 candidates to five preferred, viable finalists ready for final legal clearance.
+
+## The results
+
+- **Nearly 100 candidate names** generated across five strategic territories
+- **Five preferred, viable finalists** delivered — screened for trademark conflicts, fuzzy matches, and soundalikes within the relevant classes
+- **Brief to final legal clearance in under two weeks** — a naming programme at breakneck speed without sacrificing rigour
+- A reusable naming framework — territories, criteria, and scoring matrix — the client can apply to future products
