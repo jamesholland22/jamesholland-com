@@ -7,7 +7,7 @@ import CaseStudyCard from '../components/CaseStudyCard.astro';
 
 const CATEGORIES = ['Client work', 'Agency tools & tech', 'Side projects'] as const;
 
-const allWork = await getCollection('work', ({ data }) => !data.draft);
+const allWork = await getCollection('work', ({ data }) => !data.draft || import.meta.env.DEV);
 
 const sortedWork = allWork.sort((a, b) => {
   if (a.data.order !== undefined && b.data.order !== undefined) return a.data.order - b.data.order;
