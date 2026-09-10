@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StickerHeading from '../components/StickerHeading.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with James Holland — communications and marketing strategy for brands and agencies."
+>
+  <section class="contact">
+    <div class="container container--narrow">
+      <StickerHeading
+        parts={[
+          "Enough about me, ",
+          { sticker: "let's talk about you", color: "pink", rotate: -2 },
+        ]}
+        as="h1"
+        class="contact__heading"
+      />
+      <p class="contact__intro">
+        Tell me a little about what you're working on and I'll get back to you
+        — usually within a day or two.
+      </p>
+
+      <form
+        class="contact-form"
+        action="https://formsubmit.co/hello@jamesholland.com"
+        method="POST"
+      >
+        <!-- FormSubmit settings -->
+        <input type="hidden" name="_subject" value="New enquiry via jamesholland.com" />
+        <input type="hidden" name="_captcha" value="true" />
+        <input type="hidden" name="_next" value="https://jamesholland.com/thanks/" />
+        <input type="text" name="_honey" class="contact-form__honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <div class="contact-form__row">
+          <div class="contact-form__field">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" required autocomplete="name" />
+          </div>
+          <div class="contact-form__field">
+            <label for="cf-org">Organization</label>
+            <input type="text" id="cf-org" name="organization" autocomplete="organization" />
+          </div>
+        </div>
+
+        <div class="contact-form__row">
+          <div class="contact-form__field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" required autocomplete="email" />
+          </div>
+          <div class="contact-form__field">
+            <label for="cf-phone">Phone <span class="contact-form__optional">(optional)</span></label>
+            <input type="tel" id="cf-phone" name="phone" autocomplete="tel" />
+          </div>
+        </div>
+
+        <div class="contact-form__field">
+          <label for="cf-message">How can I help?</label>
+          <textarea id="cf-message" name="message" rows="6" required></textarea>
+        </div>
+
+        <button type="submit" class="contact-form__submit">Send it over</button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact {
+    padding-top: var(--space-24);
+    padding-bottom: var(--space-16);
+  }
+
+  .contact__heading {
+    margin-bottom: var(--space-6);
+  }
+
+  .contact__intro {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    max-width: 46ch;
+    margin-bottom: var(--space-12);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .contact-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (max-width: 40rem) {
+    .contact-form__row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contact-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .contact-form__field label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+  }
+
+  .contact-form__optional {
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .contact-form__field input,
+  .contact-form__field textarea {
+    padding: 0.65em 1em;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    color: var(--color-text);
+  }
+
+  .contact-form__field input:focus,
+  .contact-form__field textarea:focus {
+    outline: 2px solid var(--color-text);
+    outline-offset: 1px;
+  }
+
+  .contact-form__field textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+
+  /* honeypot: visually gone, still in the DOM for bots */
+  .contact-form__honey {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .contact-form__submit {
+    align-self: flex-start;
+    padding: 0.75em 2em;
+    background: var(--color-text);
+    color: var(--color-bg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+  }
+
+  .contact-form__submit:hover {
+    opacity: 0.8;
+  }
+</style>

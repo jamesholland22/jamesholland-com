@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StickerHeading from '../components/StickerHeading.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="Thanks"
+  description="Message received."
+>
+  <section class="thanks">
+    <div class="container container--narrow">
+      <StickerHeading
+        parts={[
+          { sticker: "Got it.", color: "green", rotate: -2 },
+          " Talk soon.",
+        ]}
+        as="h1"
+        class="thanks__heading"
+      />
+      <p class="thanks__copy">
+        Your message is on its way to my inbox. I read everything myself and
+        I'll come back to you as soon as I can — usually within a day or two.
+      </p>
+      <a href={`${base}/`} class="thanks__back">← Back to the work</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thanks {
+    padding-top: var(--space-32);
+    padding-bottom: var(--space-24);
+  }
+
+  .thanks__heading {
+    margin-bottom: var(--space-6);
+  }
+
+  .thanks__copy {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    max-width: 46ch;
+    margin-bottom: var(--space-8);
+  }
+
+  .thanks__back {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .thanks__back:hover {
+    color: var(--color-text);
+  }
+</style>
