@@ -1,0 +1,54 @@
+---
+title: "Foundation Stage: an AI agent for how Highwire works"
+client: "Highwire"
+agency: "Highwire"
+year: 2026
+tags: ["Generative AI", "Agent Design", "Workflow Automation", "Strategy", "Internal"]
+coverImage: "/images/acro-foundation-stage-cover.jpg"
+summary: "An agent inside Highwire's AcroAI platform that guides account teams through discovery, SWOT, strategy and KPIs for every new engagement. It turns the agency's own methods into one standard, repeatable workflow that any team member can run."
+category: "Agency tools & tech"
+featured: false
+draft: true
+protected: true
+---
+
+import CaseStudyVideo from '../../components/CaseStudyVideo.astro';
+
+## The challenge
+
+Highwire promises every client the same things: deep industry expertise, creative excellence, and a team that works as an extension of their organisation. Behind that promise is a simple principle. Research shapes the strategy, strategy shapes the campaign, integration carries it everywhere, and measurement shows it worked.
+
+In practice, every account started differently. Discovery, client briefs, stakeholder interviews, SWOTs, social audits, insights and analytics data, content reviews and KPIs were all in the mix. But the order, depth and quality depended on who was running the account. The agency had strong proprietary methods: Insight-Out briefs, ABCDE interviews, quote-driven SWOTs and the Two Truths and a Why strategy framework. They were applied unevenly, often only when a senior strategist was in the room. Specialist teams were brought in late, KPIs were sometimes set before there was a baseline, and work-in-progress lived in personal folders.
+
+The question was how to make the agency's best thinking the default on every account, without adding process overhead or making account teams wait on specialists.
+
+## What I built
+
+Together with a Highwire colleague, I designed and built the **Foundation Stage agent**: a guided programme that runs as a chat inside Acro, Highwire's generative AI platform. Account teams open the agent within any client account, and it walks them from scope to finished strategy, alongside their day-to-day work.
+
+<CaseStudyVideo src="/videos/acro-foundation-stage-demo.mp4" poster="/images/acro-foundation-stage-poster.jpg" title="Demo: running a Foundation Stage in Acro, from first prompt to finished deck" />
+
+**One workflow, ten stages.** The programme runs over four weeks in four phases. *Scope* covers the scope and manifest, client brief and research brief. *Discover* covers tailored interview guides, interview synthesis with an evidence log, and a data and listening summary. *Decide* covers a quote-driven SWOT or SCOT, strategy using Two Truths and a Why, and KPIs and measurement. *Deliver* produces the Foundation Stage presentation. Every stage ends in a finished, brand-standard Word or PowerPoint file.
+
+**Proprietary methods, encoded.** Each stage loads Highwire's own playbooks as skill files, so the agent facilitates the agency's methods rather than generic AI output. It asks plain questions, pressure-tests each decision, and challenges weak evidence. For example, if "vendor, not partner" comes up in every interview, is that a weakness or a challenge? The team still makes every strategic judgement. The agent organises, prompts and drafts.
+
+**Quality gates built in.** I designed the rules that keep the output honest. Data comes before deliverables, so interviews alone never qualify. Every claim in the SWOT is logged as a quote or data point and can be traced to the final deck. KPIs come last, chosen only after the research is in, with baselines from the audits. Every statistic is charted in the Highwire house style.
+
+**A shared memory for the account.** A custom MCP integration connects the agent to a Foundation database. When someone opens the account, the agent already knows what is done, what is open and what comes next. Each stage saves its file to the account with notes for the next person. One person can run the interviews and another can build the SWOT in their own chat, and Acro keeps everyone in sync. Account leads own the Foundation Stage, but anyone on the team can pick up the next stage.
+
+**A bridge to specialist teams.** Scoping is where specialist work gets planned, so I built the agency's specialist services into the scope stage with modules, owners and minimum budgets. These include Insights & Analytics (share of voice, signal trends, AcroAudience models, AcroAnswers AI visibility), Content (SEO, site and CRM audits), Social and Integrated Solutions (executive and brand social audits), and Strategy (strategic platform, compete strategy, ad audits). Specialists are involved from day one instead of being called in at the end, and gates send work to the Insights team when it needs expert help.
+
+## What every client receives
+
+The Foundation Stage ends in one presentation with the same two-part shape on every account:
+
+- **What we learned:** why now, our approach and findings, the SWOT in the client's own words, and how they see themselves against our diagnosis
+- **Where it takes us:** Two Truths and a Why with the strategic platform, paid, earned, social and owned tactics, a four-quarter roadmap with the first 90 days, and KPIs with baselines and targets
+
+## The results
+
+- **One standard process on every account:** discovery, SWOT, strategy and KPIs in the first four weeks, with methodology consistent across client tiers
+- **10 stages and 5 stakeholder lenses** (budget holder, comms, marketing, product, leadership), each producing a finished, client-ready file
+- **More self-reliant account teams.** Any team member can run a stage with the agency's methods guiding them, instead of waiting for a senior strategist
+- **Evidence-backed strategy.** Every claim is traceable from the source quote or data point to the final deck
+- **Rolling out across the agency** in stages: previews for executive and leadership teams, sector leads and VPs, an agency-wide all-hands launch, office hours with specialist leads, and monthly updates that add new services and teams to the agent, starting with Creative

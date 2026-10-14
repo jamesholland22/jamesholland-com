@@ -16,6 +16,7 @@ interface Props {
   muted?: boolean;
   loop?: boolean;
   narrow?: boolean; // for portrait video: cap width and centre
+  poster?: string; // path from /public, shown before playback
 }
 
 const {
@@ -28,6 +29,7 @@ const {
   muted = false,
   loop = false,
   narrow = false,
+  poster,
 } = Astro.props;
 ---
 
@@ -44,6 +46,7 @@ const {
 ) : (
   <video
     src={withBase(src)}
+    poster={withBase(poster)}
     controls={controls}
     playsinline={playsinline}
     autoplay={autoplay}
