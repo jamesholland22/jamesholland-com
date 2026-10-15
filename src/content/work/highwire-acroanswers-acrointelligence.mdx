@@ -4,6 +4,7 @@ client: "Highwire"
 agency: "Highwire"
 year: 2026
 tags: ["Generative AI", "Product Strategy", "AI Visibility", "Media Intelligence", "Data Platforms"]
+coverImage: "/images/acrointelligence-coverage.webp"
 summary: "Highwire's proprietary AI visibility and media intelligence platforms. I architected AcroAnswers from an MVP into a revenue-generating product that competes with Profound, Meltwater, Semrush and Ahrefs. I also turned AcroIntelligence from an internal prototype into a client-facing intelligence engine for brands including Dropbox, NVIDIA and Dell."
 category: "Agency tools & tech"
 featured: false
@@ -11,7 +12,7 @@ draft: true
 protected: true
 ---
 
-{/* TODO: add landing-page GIFs/graphics from teamhighwire.com/acroanswers and /acrointelligence (host blocked from the build environment). */}
+import ImageGrid from '../../components/ImageGrid.astro';
 
 ## The challenge
 
@@ -35,6 +36,11 @@ Highwire wanted proprietary answers to both problems: products clients would pay
 - **Competitive context.** Each brand's visibility is benchmarked against the competitors that matter to it.
 - **Sources and citations.** The platform shows which websites and publications the models cite, pointing PR, content and SEO teams to the sources that shape AI answers.
 - **From insight to action.** The output links visibility gaps to recommendations the account team can act on through earned, owned and content programmes.
+
+<ImageGrid
+  images={[{ src: '/images/acroanswers-citations.webp', alt: 'AcroAnswers citations dashboard: citation share, citation volume by domain category, citations by AI model, and an entity-by-domain breakdown' }]}
+  caption="AcroAnswers citation analysis: which domains AI models cite, broken down by category, model and brand."
+/>
 
 **Going to market.** AcroAnswers launched publicly in September 2026 as a paid product, competing directly with third-party offerings from Profound, Meltwater, Semrush and Ahrefs. Its advantage is the agency around it. The same team that reads the data can run the programmes that move it.
 
