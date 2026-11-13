@@ -31,6 +31,7 @@ const { slug, title, client, year, tags, coverImage, coverVideo, summary, featur
   class:list={['card', { 'card--featured': featured }]}
   data-has-video={coverVideo ? 'true' : undefined}
   data-tags={tags.join('|')}
+  data-client={client}
 >
   <div class="card__image-wrap">
     {coverVideo ? (
