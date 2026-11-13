@@ -92,6 +92,8 @@ const { slug, title, client, year, tags, coverImage, coverVideo, summary, featur
     overflow: hidden;
     background: linear-gradient(135deg, var(--color-border) 0%, var(--color-surface) 100%);
     aspect-ratio: 16 / 9;
+    /* Hairline and soft shadow so light covers don't melt into the page */
+    box-shadow: 0 0 0 1px rgba(26, 26, 26, 0.08), 0 8px 24px -12px rgba(26, 26, 26, 0.25);
   }
 
   .card[data-has-video] .card__image-wrap {
