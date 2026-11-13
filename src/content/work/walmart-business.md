@@ -8,7 +8,7 @@ coverImage: "/images/wmb-poster.png"
 coverVideo: "/videos/wmb-thumb.mp4"
 summary: "Full-funnel launch strategy for Walmart's B2B commerce platform spanning earned media, content marketing, executive thought leadership, and lifecycle campaigns targeting small business and nonprofit customers."
 category: "Client work"
-featured: true
+featured: false
 order: 1
 draft: false
 protected: true
