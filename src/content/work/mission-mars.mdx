@@ -5,7 +5,7 @@ agency: "Archetype"
 year: 2019
 tags: ["Content Marketing", "Developer Marketing", "Experiential", "Global Campaign"]
 coverImage: "/images/mission-mars-cover.jpg"
-summary: "An interactive developer training campaign set on a colonised Mars — 59 workshops, nearly 1,000 hours of activity, some of the highest satisfaction scores in Microsoft history, and a special session at NASA's Johnson Space Center."
+summary: "A story-driven developer training campaign set on a colonised Mars, which grew from a single IoT workshop into an episodic series that went on to cover Xamarin mobile development and conversational AI. 59 workshops in 31 countries, some of the highest satisfaction scores in Microsoft history, and a special session at NASA's Johnson Space Center."
 category: "Client work"
 featured: false
 order: 6
@@ -14,24 +14,86 @@ protected: true
 ---
 
 import CaseStudyVideo from '../../components/CaseStudyVideo.astro';
+import ImageGrid from '../../components/ImageGrid.astro';
 
 ## The brief
 
 Microsoft needed to create hands-on developer training that would actually get developers excited to show up. Standard tutorial formats — static documentation, webinars, slide decks — weren't cutting through. The ask was to create something inspiring, immersive, and genuinely fun, without sacrificing technical rigour.
 
-## What I did
+## The idea
 
-We created *Mission Mars: Fourth Horizon* — an interactive training series built around an original narrative. The setting: a near future in which humans have colonised Mars. The mission: a last-ditch effort to reconnect stranded Martian astronauts with Earth, using Microsoft tools and technologies to solve a series of escalating technical crises.
+We created *Mission Mars: Fourth Horizon*, an interactive training series built around an original narrative. The setting: a near future in which humans have colonised Mars. The mission: a last-ditch effort to reconnect stranded Martian astronauts with Earth, using Microsoft tools and technologies to solve a series of escalating technical crises.
 
 Developers weren't just running through exercises. They were enlisted into a mission. Each technical challenge was framed as a story beat, with real stakes and a reason to care about the outcome. The narrative gave the training momentum and made the Microsoft tools feel purposeful rather than arbitrary.
 
-We ran the programme as a global series of workshops, bringing the experience to developer communities across 31 countries.
+The story needed a world to live in. We built a full identity around a weathered mission patch, a campaign hub on Microsoft.com where developers chose an operation and booked a session near them, and crew kit for every room: T-shirts, caps, mugs, mission briefings and "Level 6 clearance" badges. I worked alongside creative director Albert Lewis Jr., who led the identity, design, video and in-room experience.
+
+<ImageGrid
+  images={[
+    { src: '/images/mission-mars-brand.jpg', alt: 'The Mission Mars campaign hub listing three operations, beside the weathered mission patch and a collage of crew kit: T-shirts, mugs, caps, badges and mission briefings' },
+  ]}
+  caption="The campaign hub, the mission patch and the crew kit."
+/>
+
+## The first mission: Operation Earth-Mars Bridge
+
+The first mission set up the story and focused on the Internet of Things. Earth's first crew on Mars has gone silent, and regular channels can't reach them. Developers had to find another way in, using Azure to connect to remote devices on the planet.
+
+The teaching example was a smart coffee maker in the Mars base. Developers connected to it through Azure, pulled images from its built-in camera and confirmed the crew were safe. It was a playful way into a serious idea: any connected device can become a source of data when other systems fail.
+
+Every room was dressed as part of the mission, with branded screens, banners and kit, so attendees arrived as crew rather than an audience.
 
 <CaseStudyVideo src="/videos/mission-mars-recap.mp4" title="Mission Mars campaign recap video" />
 
+<ImageGrid
+  images={[
+    { src: '/images/mission-mars-workshops.jpg', alt: 'Four Mission Mars workshop rooms full of developers at laptops, with the mission on the main screens' },
+  ]}
+  caption="Workshops around the world, each room dressed as part of the mission."
+/>
+
+<ImageGrid
+  images={[
+    { src: '/images/mission-mars-crew.jpg', alt: 'Groups of attendees in Mission Mars T-shirts and caps posing with the Operation Earth-Mars Bridge banners' },
+  ]}
+  caption="Operation Earth-Mars Bridge crews around the world."
+/>
+
+## Expanding the mission: new operations
+
+Because the story was built as a world rather than a one-off event, we could extend it in episodes. Each new operation added a chapter to the same narrative and taught a different part of the Microsoft stack, so returning developers had a reason to come back and the format could follow Microsoft's product priorities. Together, the series ran as workshops for developer communities in 31 countries.
+
+### Operation Remote Resupply: Xamarin mobile development
+
+The Martian crew was running low on supplies, and developers had to keep them stocked with nothing but their code. Across the full Xamarin mobile lifecycle, they built, tested and distributed an app using Xamarin.Forms for Android, iOS and Windows. Along the way they covered per-platform customisation, authentication, crash reporting and integration with Microsoft Azure.
+
+To make progress visible in the room, we designed a live mission control dashboard. It tracked each team's resupply drone (altitude, descent rate, fuel and thrust) across a map of Mars, with a mission clock and a running tally of landings and crashes.
+
+<ImageGrid
+  images={[
+    { src: '/images/mission-mars-remote-resupply.jpg', alt: 'The Operation Remote Resupply mission control dashboard tracking six teams on a map of Mars, above the drone key art and the dashboard status icon system' },
+  ]}
+  caption="Operation Remote Resupply: the mission control dashboard, key art and status icons."
+/>
+
+### Operation M.A.X.: conversational AI
+
+The final episode introduced a new crew member. Short of people, the Mars crew turned to an AI assistant, and developers spent a two-day event building it with Microsoft's Conversations as a Platform tools.
+
+The assistant needed a personality, so we created M.A.X. as a character: a slightly sleepy, endlessly helpful robot with his own expression sheet, an animated introduction and a storyboard that played out in the workshop. Developers then brought him to life as a working help-desk bot in Skype.
+
+<ImageGrid
+  images={[
+    { src: '/images/mission-mars-max.jpg', alt: 'Operation M.A.X. key art, the M.A.X. robot character sheet, the animation storyboard and the finished help-desk bot running in Skype' },
+  ]}
+  caption="Operation M.A.X.: key art, character design, animation storyboard and the finished bot."
+/>
+
 ## The results
 
+- **Over 500,000 developers** reached in the US alone through social demand generation
 - **5,000 developers** trained across **31 countries**
 - **59 workshops** totalling nearly **1,000 hours** of training activity
+- **84% of attendees** motivated to recommend, try, buy or deploy Microsoft tools
 - Among the **highest satisfaction scores in Microsoft's history** for a training programme
 - The team was invited by **NASA** to run a special session at the Johnson Space Center in Houston — a mark of the programme's credibility with the scientific and developer community
