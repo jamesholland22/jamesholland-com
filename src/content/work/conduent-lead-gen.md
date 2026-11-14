@@ -17,6 +17,13 @@ protected: true
 
 Conduent had a genuinely interesting asset: its annual Customer Experience of Urban Travel report, packed with proprietary data on how people navigate city transport systems. The problem was extracting real business value from it. Thought leadership that stays as a PDF download rarely converts. Conduent needed a campaign that could reach the right decision-makers — senior city planners and public sector procurement leaders — and turn report interest into qualified sales leads.
 
+## The results
+
+- **200+ qualified leads** from paid social targeting senior public sector decision-makers
+- **10,000+ clicks** — accounting for more than **57% of all page views** during the campaign
+- **20 media placements** in key industry publications
+- The campaign was recognised internally as one of the most successful Conduent had ever run and established a new best practice for integrated marketing across the business
+
 ## What I did
 
 We built an integrated programme combining paid social lead-gen with strategic media relations, designed so each channel reinforced the other.
@@ -26,10 +33,3 @@ On the paid side, we used social targeting to reach senior-level city planners a
 On the earned side, we secured media coverage in key publications and then promoted those placements through sponsored content — giving the coverage a second life as a trust signal in front of the same audience we were targeting through paid.
 
 The two channels created a compounding effect: earned coverage gave the paid campaign credibility, and the paid campaign amplified the reach of the earned work.
-
-## The results
-
-- **200+ qualified leads** from paid social targeting senior public sector decision-makers
-- **10,000+ clicks** — accounting for more than **57% of all page views** during the campaign
-- **20 media placements** in key industry publications
-- The campaign was recognised internally as one of the most successful Conduent had ever run and established a new best practice for integrated marketing across the business

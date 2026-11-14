@@ -22,6 +22,17 @@ The launch of Walmart Business, a dedicated B2B platform for small businesses an
 
 The goal wasn't just awareness. It was trust. Proving that a B2B-focused brand from the world's most familiar retailer could establish real credibility in a crowded space.
 
+## The results
+
+Within our first year, our joined-up, omnichannel strategy delivered breakthrough value
+
+- **800% increase in GMV** driven through lifecycle campaign and content marketing activity
+- **16,000+ customers** converted directly from prospect nurture sequences
+- **40% reduction** in email unsubscribe rates against benchmarks from the B2C business
+- **6.5% average CTOR** across all email campaigns — compared to a 0.07% CTOR benchmark for Walmart's B2C programs
+
+Beyond the numbers, the programme established Walmart Business as a valid and valuable business within the eCommerce organisation's mix of platforms. The credibility and content infrastructure built during this period laid the foundation for Walmart Business's continued growth.
+
 ## My role: Integrated strategy
 
 The strategy built trust around six interconnected pillars, designed to reach small businesses across every stage of the funnel — from first awareness to loyal customer.
@@ -37,14 +48,3 @@ The strategy built trust around six interconnected pillars, designed to reach sm
 **Branded events.** We stood up an events programme including webinars and in-person salon dinners, giving the brand a live presence in the SMB community and generating direct relationship opportunities with both media and customers.
 
 **Lifecycle marketing.** We architected Walmart Business's Marketing Operations function, including all audience segmentation and always-on lifecycle campaigns covering prospect nurture, customer acquisition, and retention. All of these drafted off of content, social or earned programs to build cohesive momentum around the Walmart Business brand promise of saving time, money, and hassle.
-
-## The results
-
-Within our first year, our joined-up, omnichannel strategy delivered breakthrough value
-
-- **800% increase in GMV** driven through lifecycle campaign and content marketing activity
-- **16,000+ customers** converted directly from prospect nurture sequences
-- **40% reduction** in email unsubscribe rates against benchmarks from the B2C business
-- **6.5% average CTOR** across all email campaigns — compared to a 0.07% CTOR benchmark for Walmart's B2C programs
-
-Beyond the numbers, the programme established Walmart Business as a valid and valuable business within the eCommerce organisation's mix of platforms. The credibility and content infrastructure built during this period laid the foundation for Walmart Business's continued growth.

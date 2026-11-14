@@ -19,6 +19,12 @@ Vanguard's Enterprise Advice APIs represented a significant expansion of the bus
 
 Vanguard needed to communicate complex, highly regulated financial products to a range of external audiences who didn't share the same institutional vocabulary. Without the right messaging, design system, or content infrastructure, every new API release was a bespoke, time-consuming exercise. The business needed a replicable foundation.
 
+## The results
+
+- **40–50% reduction** in the time Vanguard takes to externalize new APIs and produce accompanying documentation
+- A replicable content and design infrastructure that scales across the growing API portfolio
+- Consistent, audience-first messaging for a complex product communicated clearly to external markets for the first time
+
 ## What we did
 
 We built the foundational infrastructure Vanguard needed to scale external communications across its Advice API portfolio.
@@ -30,9 +36,3 @@ We built the foundational infrastructure Vanguard needed to scale external commu
 **Design system and style guides.** We created a modular design system and accompanying style guides that established consistent visual and tonal standards across all externally-facing API content — from product documentation to sales decks.
 
 **Slide library.** A turnkey PowerPoint library, linked directly to the modular messaging framework, equipped executives, stakeholders, and sales teams to tell consistent stories with speed. Centrally managed and cross-linked to relevant proof points, the library keeps communications compliant and current without requiring teams to build from scratch each time.
-
-## The results
-
-- **40–50% reduction** in the time Vanguard takes to externalize new APIs and produce accompanying documentation
-- A replicable content and design infrastructure that scales across the growing API portfolio
-- Consistent, audience-first messaging for a complex product communicated clearly to external markets for the first time
