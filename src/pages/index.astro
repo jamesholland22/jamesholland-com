@@ -39,13 +39,13 @@ const filterTags = [...tagCounts.entries()]
 // Client logos in the hero; clicking one filters the client-work grid.
 // `client` must match the case studies' `client` frontmatter.
 const clientLogos = [
-  { client: 'NVIDIA', file: 'nvidia.svg', ratio: 164 / 30 },
-  { client: 'Walmart', file: 'walmart.svg', ratio: 264.58 / 50.31 },
-  { client: 'Microsoft', file: 'microsoft.svg', ratio: 337.6 / 72 },
-  { client: 'Vanguard', file: 'vanguard.svg', ratio: 127 / 27 },
-  { client: 'Mercedes-Benz', file: 'mercedes.svg', ratio: 3144.1 / 290 },
-  { client: 'IBM', file: 'ibm.svg', ratio: 1075 / 401.15 },
-  { client: 'Intuit', file: 'intuit.svg', ratio: 845.85 / 170.09 },
+  { client: 'NVIDIA', file: 'nvidia.svg', ratio: 166 / 32 },
+  { client: 'Walmart', file: 'walmart.svg', ratio: 267.58 / 53.3 },
+  { client: 'Microsoft', file: 'microsoft.svg', ratio: 342.6 / 77 },
+  { client: 'Vanguard', file: 'vanguard.svg', ratio: 129 / 29 },
+  { client: 'Mercedes-Benz', file: 'mercedes.svg', ratio: 3184.1 / 387 },
+  { client: 'IBM', file: 'ibm.svg', ratio: 1099 / 425.15 },
+  { client: 'Intuit', file: 'intuit.svg', ratio: 859.45 / 183.69 },
 ]
   .filter(l => clientEntries.some(e => e.data.client === l.client))
   // equal visual area so wide wordmarks and compact marks look balanced
@@ -383,13 +383,8 @@ const logoBase = import.meta.env.BASE_URL.replace(/\/$/, '');
       }
       if (isWide(next)) {
         queue.shift();
-        // partner: the nearby single with the longest summary (best gap filler)
-        let partnerIdx = -1, best = -1;
-        for (let i = 0; i < Math.min(queue.length, 4); i++) {
-          if (isWide(queue[i])) continue;
-          const len = (queue[i].querySelector('.card__summary')?.textContent || '').length;
-          if (len > best) { best = len; partnerIdx = i; }
-        }
+        // partner: the next single in the set order, so `order` fully controls placement
+        const partnerIdx = queue.findIndex(q => !isWide(q));
         const partner = partnerIdx >= 0 ? queue.splice(partnerIdx, 1)[0] : null;
         const featuredLeft = featuredRowCount % 2 === 0;
         featuredRowCount++;

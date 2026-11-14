@@ -7,8 +7,8 @@ tags: ["Product Marketing", "Brand Strategy", "Content Strategy", "UX Research",
 coverImage: "/images/vanguard-cover.jpg"
 summary: "Foundational audience research, messaging, and modular content infrastructure to bring Vanguard's Enterprise Advice APIs to external markets for the first time — cutting API documentation time by 40–50%."
 category: "Client work"
-featured: true
-order: 2
+featured: false
+order: 1.3
 draft: false
 protected: true
 ---
